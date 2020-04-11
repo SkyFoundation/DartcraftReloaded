@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Bleed"
+      "text": "流血"
     },
     "description": {
-      "text": "Sticking someone with an arrow might make them bleed"
+      "text": "箭可以让人流血"
     },
     "icon": {
       "item": "minecraft:arrow"

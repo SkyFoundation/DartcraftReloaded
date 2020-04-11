@@ -1,7 +1,7 @@
 {
     "display": {
         "title": {
-            "text": "Dartcraft Reloaded",
+            "text": "达特工艺-重制",
             "color": "gold",
             "bold": false,
             "italic": false,
@@ -10,7 +10,7 @@
             "obfuscated": false
         },
         "description": {
-            "text": "Make an Infuser by Combining a Force Rod and an Enchantment Table"
+            "text": "用附魔台和力量棍制作一个力量注魔器吧"
         },
         "icon": {
             "item": "dartcraftreloaded:infuser"

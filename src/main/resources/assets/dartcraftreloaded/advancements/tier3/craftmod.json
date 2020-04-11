@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Crafting"
+      "text": "合成"
     },
     "description": {
-      "text": "I can craft in my inventory, but only with a belt"
+      "text": "也许有了腰带之后,我可以在我的背包里制作任何东西"
     },
     "icon": {
       "item": "minecraft:crafting_table"

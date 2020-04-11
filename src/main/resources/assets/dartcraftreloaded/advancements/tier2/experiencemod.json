@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Experience"
+      "text": "经验"
     },
     "description": {
-      "text": "A book might just be able to hold all of my extra experience"
+      "text": "也许一本书,可以记录我所有的经验?"
     },
     "icon": {
       "item": "minecraft:experience_bottle"

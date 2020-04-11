@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Luck"
+      "text": "幸运"
     },
     "description": {
-      "text": "I bet the inside of a fortune cookie might make me have a bit more luck"
+      "text": "我相信幸运曲奇可以让我们变得更幸运"
     },
     "icon": {
       "item": "dartcraftreloaded:cookie_fortune"

@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Heat"
+      "text": "心"
     },
     "description": {
-      "text": "Golden Power Sources seem to work in a furnace. What could they do on a tool?"
+      "text": "黄金能源似乎可以用作燃料,那把如果把它用于工具上呢?"
     },
     "icon": {
       "item": "dartcraftreloaded:goldenPowerSource"

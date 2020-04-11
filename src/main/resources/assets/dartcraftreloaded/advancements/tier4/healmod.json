@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Healing"
+      "text": "治疗"
     },
     "description": {
-      "text": "A Ghast Tear might make this rod into a great instrument of healing"
+      "text": "恶魔泪拥有治疗的能力,疯狂暗示"
     },
     "icon": {
       "item": "minecraft:ghast_tear"

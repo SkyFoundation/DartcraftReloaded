@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Freezing"
+      "text": "冻结"
     },
     "description": {
-      "text": "It's getting colder"
+      "text": "越来越冷了"
     },
     "icon": {
       "item": "dartcraftreloaded:cookie_snow"

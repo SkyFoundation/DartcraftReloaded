@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Lumberjack"
+      "text": "伐木工"
     },
     "description": {
-      "text": "A log might just allow me to take down a whole tree in one swell foop"
+      "text": "一个圆木也许可以让我把一整棵树都给砍下?"
     },
     "icon": {
       "item": "dartcraftreloaded:forceLog"

@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Force"
+      "text": "力量e"
     },
     "description": {
-      "text": "Maybe adding a force Nugget to something sharp will add some mystical force"
+      "text": "\n      也许把力量粒加到什么锋利的东西去,会发生一些神奇的事情"
     },
     "icon": {
       "item": "dartcraftreloaded:nugget_force"

@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Silk Touch"
+      "text": "丝绸之触"
     },
     "description": {
-      "text": "Silky webs could make my tool have a hint of silk to its touch"
+      "text": "也许一些网可以让我的工具变得更精准"
     },
     "icon": {
       "item": "minecraft:web"

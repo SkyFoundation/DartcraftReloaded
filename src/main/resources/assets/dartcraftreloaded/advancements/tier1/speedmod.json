@@ -1,10 +1,10 @@
 {
   "display": {
     "title": {
-      "text": "Speed"
+      "text": "急速"
     },
     "description": {
-      "text": "Sugar seems to make people go fast, I wonder what it does to my tools and armor"
+      "text": "糖可以让人跑的更快,那么工具呢?"
     },
     "icon": {
       "item": "minecraft:sugar"
