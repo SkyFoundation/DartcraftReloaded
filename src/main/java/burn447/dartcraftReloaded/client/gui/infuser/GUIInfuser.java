@@ -28,8 +28,8 @@ import java.util.List;
 public class GUIInfuser extends GuiContainer {
 
     private TileEntityInfuser te;
-    private GuiButton startButton = new GuiButton(0, 39, 101, 12, 12, "Start Button");
-    private GuiButton guideButton = new GuiButton(1, 123, 17, 12, 12, "Open Guide GUI");
+    private GuiButton startButton = new GuiButton(0, 39, 101, 12, 12, "开始按钮");
+    private GuiButton guideButton = new GuiButton(1, 123, 17, 12, 12, "打开指南UI");
     private ProgressBar infuserProgress;
 
     private ResourceLocation TEXTURE = new ResourceLocation(References.modId, "textures/gui/container/forceinfuser.png");
@@ -92,7 +92,7 @@ public class GUIInfuser extends GuiContainer {
             if (te.tank.getFluid() == null) {
                 text.add(I18n.format("gui.blockInfuser.Empty.tooltip"));
             } else {
-                text.add(TextFormatting.YELLOW + "Liquid Force" + TextFormatting.WHITE + " (" + te.tank.getFluidAmount() + ")");
+                text.add(TextFormatting.YELLOW + "液态力量" + TextFormatting.WHITE + " (" + te.tank.getFluidAmount() + ")");
             }
 
             this.drawHoveringText(text, actualMouseX, actualMouseY);
