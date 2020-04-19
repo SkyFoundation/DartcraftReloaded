@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FF",
+    " S",
+    " S"  ],
+  "key": {
+    "F": [
+      {
+        "item": "dartcraftreloaded:ingot_force",
+        "data": 0
+      }
+    ],
+    "S": [
+      {
+        "item": "dartcraftreloaded:stick_force",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "dartcraftreloaded:forcehoe",
+    "data": 0
+  }
+}
+

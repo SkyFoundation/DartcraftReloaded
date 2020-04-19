@@ -42,7 +42,14 @@ public class ModItems {
     public static ItemForceShears forceShears = new ItemForceShears("forceShears");
     public static ItemForceMitt forceMitt = new ItemForceMitt("forceMitt");
     public static ItemMagnetGlove magnetGlove = new ItemMagnetGlove("magnetGlove");
-
+    
+    
+    public static ItemForceHoe ForceHoe = new ItemForceHoe("ForceHoe");
+    public static ItemForcesMultifunctionalTools ForceMultifunctionalTools = new ItemForcesMultifunctionalTools("force_multifunctional_tools");
+    public static ItemToolsCore ToolsCore = new ItemToolsCore("tools_core");
+    
+    
+    
     //Experience Tome
     public static ItemExperienceTome experienceTome = new ItemExperienceTome("experienceTome");
 
@@ -76,11 +83,16 @@ public class ModItems {
                 forcePack,
                 forceBelt,
                 bottledWither,
-                inertCore
+                inertCore,
+
+                ForceHoe,
+                ForceMultifunctionalTools,
+                ToolsCore
         );
     }
 
-    public static void registerModels() {
+    public static void registerModels()
+    {
         gemForceGem.registerItemModel();
         ingotForce.registerItemModel();
         nuggetForce.registerItemModel();
@@ -110,5 +122,10 @@ public class ModItems {
         forceBelt.registerItemModel();
         bottledWither.registerItemModel();
         inertCore.registerItemModel();
+        
+        ForceHoe.registerItemModel();
+        ForceMultifunctionalTools.registerItemModel();
+        ToolsCore.registerItemModel();
+        
     }
 }
