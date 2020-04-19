@@ -15,6 +15,11 @@ item.forcePack.name=力量背包
 item.forceBelt.name=力量腰带
 item.bottledWither.name=瓶中凋零
 
+
+item.tools_core.name=工具核心
+item.force_multifunctional_tools.name=力量多功工具
+
+
 #Armor
 item.force_helmet.name=力量头盔
 item.force_chest.name=力量胸甲
@@ -22,6 +27,7 @@ item.force_legs.name=力量裤子
 item.force_boots.name=力量靴子
 
 #Tools
+item.forcehoe.name=力量锄
 item.forcePickaxe.name=力量镐
 item.forceAxe.name=力量斧
 item.forceSword.name=力量剑
