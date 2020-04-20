@@ -1,0 +1,7 @@
+{
+    "parent": "dartcraftreloaded:block/force_fire_side",
+    "textures": {
+        "particle": "dartcraftreloaded:block/force_fire_layer_1",
+        "fire": "dartcraftreloaded:block/force_fire_layer_1"
+    }
+}

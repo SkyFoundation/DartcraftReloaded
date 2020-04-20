@@ -34,8 +34,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBoesg extends BlockFire
+public class BlockForceFire extends Block
 {
+
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 15);
 	public static final PropertyBool NORTH = PropertyBool.create("north");
 	public static final PropertyBool EAST = PropertyBool.create("east");
@@ -45,12 +46,11 @@ public class BlockBoesg extends BlockFire
 	private final Map<Block, Integer> encouragements = Maps.<Block, Integer>newIdentityHashMap();
 	private final Map<Block, Integer> flammabilities = Maps.<Block, Integer>newIdentityHashMap();
 
-
 	protected String name;
     
-	    public BlockBoesg(String name)
+	    public BlockForceFire(String name)
 	    {
-	    	//super(Material.FIRE);
+	    	super(Material.FIRE);
 	        //this.setHardness(0.3f);
 	        this.setRegistryName(name);
 	        this.setTranslationKey(name);
@@ -64,7 +64,7 @@ public class BlockBoesg extends BlockFire
 	        
 	     //   init();
 	        
-	       // BlockBoesg.init();
+	       // BlockForceFire.init();
 	        
 	      //  this.createItemBlock();
 
@@ -96,7 +96,7 @@ public class BlockBoesg extends BlockFire
 	     */
 	    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	    {
-	        if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP) && !Blocks.FIRE.canCatchFire(worldIn, pos.down(), EnumFacing.UP))
+	        if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP) && !ModBlocks.ForceFire.canCatchFire(worldIn, pos.down(), EnumFacing.UP))
 	        {
 	            return state.withProperty(NORTH, this.canCatchFire(worldIn, pos.north(), EnumFacing.SOUTH))
 	                        .withProperty(EAST,  this.canCatchFire(worldIn, pos.east(), EnumFacing.WEST))
@@ -107,64 +107,61 @@ public class BlockBoesg extends BlockFire
 	        return this.getDefaultState();
 	    }
 
-	    /*
-	    protected BlockFire()
-	    {
-	        super(Material.FIRE);
-	        this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)).withProperty(UPPER, Boolean.valueOf(false)));
-	        this.setTickRandomly(true);
-	    }
-	    */
 
 	    //@Override
 	    public static void init()
 	    {
-	    	//Blocks.FIRE.setFireInfo(Blocks.TNT, 15, 100);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.TNT, 15, 100);
-	    	
-	    	/*
-	    	ModBlocks.Boesg.setFireInfo(Blocks.PLANKS, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.DOUBLE_WOODEN_SLAB, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.WOODEN_SLAB, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.OAK_FENCE_GATE, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.SPRUCE_FENCE_GATE, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.BIRCH_FENCE_GATE, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.JUNGLE_FENCE_GATE, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.DARK_OAK_FENCE_GATE, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.ACACIA_FENCE_GATE, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.OAK_FENCE, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.SPRUCE_FENCE, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.BIRCH_FENCE, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.JUNGLE_FENCE, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.DARK_OAK_FENCE, 5, 20);
-	    	
-	    	ModBlocks.Boesg.setFireInfo(Blocks.ACACIA_FENCE, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.OAK_STAIRS, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.BIRCH_STAIRS, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.SPRUCE_STAIRS, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.JUNGLE_STAIRS, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.ACACIA_STAIRS, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.DARK_OAK_STAIRS, 5, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.LOG, 5, 5);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.LOG2, 5, 5);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.LEAVES, 30, 60);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.LEAVES2, 30, 60);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.BOOKSHELF, 30, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.TNT, 15, 100);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.TALLGRASS, 60, 100);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.DOUBLE_PLANT, 60, 100);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.YELLOW_FLOWER, 60, 100);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.RED_FLOWER, 60, 100);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.DEADBUSH, 60, 100);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.WOOL, 30, 60);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.VINE, 15, 100);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.COAL_BLOCK, 5, 5);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.HAY_BLOCK, 60, 20);
-	    	ModBlocks.Boesg.setFireInfo(Blocks.CARPET, 60, 20);
-	        */
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.DIRT, 5, 20);
+
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.PLANKS, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.DOUBLE_WOODEN_SLAB, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.WOODEN_SLAB, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.OAK_FENCE_GATE, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.SPRUCE_FENCE_GATE, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.BIRCH_FENCE_GATE, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.JUNGLE_FENCE_GATE, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.DARK_OAK_FENCE_GATE, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.ACACIA_FENCE_GATE, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.OAK_FENCE, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.SPRUCE_FENCE, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.BIRCH_FENCE, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.JUNGLE_FENCE, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.DARK_OAK_FENCE, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.ACACIA_FENCE, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.OAK_STAIRS, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.BIRCH_STAIRS, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.SPRUCE_STAIRS, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.JUNGLE_STAIRS, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.ACACIA_STAIRS, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.DARK_OAK_STAIRS, 5, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.LOG, 5, 5);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.LOG2, 5, 5);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.LEAVES, 30, 60);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.LEAVES2, 30, 60);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.BOOKSHELF, 30, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.TNT, 15, 100);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.TALLGRASS, 60, 100);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.DOUBLE_PLANT, 60, 100);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.YELLOW_FLOWER, 60, 100);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.RED_FLOWER, 60, 100);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.DEADBUSH, 60, 100);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.WOOL, 30, 60);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.VINE, 15, 100);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.COAL_BLOCK, 5, 5);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.HAY_BLOCK, 60, 20);
+	    	ModBlocks.ForceFire.setFireInfo(Blocks.CARPET, 60, 20);
 	    }
 
-	   
+	    public void setFireInfo(Block blockIn, int encouragement, int flammability)
+	    {
+	        if (blockIn == Blocks.AIR) throw new IllegalArgumentException("Tried to set air on fire... This is bad.");
+	        this.encouragements.put(blockIn, Integer.valueOf(encouragement));
+	        this.flammabilities.put(blockIn, Integer.valueOf(flammability));
+	    }
+
+	    
+	    
+	    
 
 	    /**
 	     * @deprecated call via {@link IBlockState#getCollisionBoundingBox(IBlockAccess,BlockPos)} whenever possible.
@@ -492,9 +489,9 @@ public class BlockBoesg extends BlockFire
 	            worldIn.playSound((double)((float)pos.getX() + 0.5F), (double)((float)pos.getY() + 0.5F), (double)((float)pos.getZ() + 0.5F), SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 1.0F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.3F, false);
 	        }
 
-	        if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP) && !Blocks.FIRE.canCatchFire(worldIn, pos.down(), EnumFacing.UP))
+	        if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP) && !ModBlocks.ForceFire.canCatchFire(worldIn, pos.down(), EnumFacing.UP))
 	        {
-	            if (Blocks.FIRE.canCatchFire(worldIn, pos.west(), EnumFacing.EAST))
+	            if (ModBlocks.ForceFire.canCatchFire(worldIn, pos.west(), EnumFacing.EAST))
 	            {
 	                for (int j = 0; j < 2; ++j)
 	                {
@@ -505,7 +502,7 @@ public class BlockBoesg extends BlockFire
 	                }
 	            }
 
-	            if (Blocks.FIRE.canCatchFire(worldIn, pos.east(), EnumFacing.WEST))
+	            if (ModBlocks.ForceFire.canCatchFire(worldIn, pos.east(), EnumFacing.WEST))
 	            {
 	                for (int k = 0; k < 2; ++k)
 	                {
@@ -516,7 +513,7 @@ public class BlockBoesg extends BlockFire
 	                }
 	            }
 
-	            if (Blocks.FIRE.canCatchFire(worldIn, pos.north(), EnumFacing.SOUTH))
+	            if (ModBlocks.ForceFire.canCatchFire(worldIn, pos.north(), EnumFacing.SOUTH))
 	            {
 	                for (int l = 0; l < 2; ++l)
 	                {
@@ -527,7 +524,7 @@ public class BlockBoesg extends BlockFire
 	                }
 	            }
 
-	            if (Blocks.FIRE.canCatchFire(worldIn, pos.south(), EnumFacing.NORTH))
+	            if (ModBlocks.ForceFire.canCatchFire(worldIn, pos.south(), EnumFacing.NORTH))
 	            {
 	                for (int i1 = 0; i1 < 2; ++i1)
 	                {
@@ -538,7 +535,7 @@ public class BlockBoesg extends BlockFire
 	                }
 	            }
 
-	            if (Blocks.FIRE.canCatchFire(worldIn, pos.up(), EnumFacing.DOWN))
+	            if (ModBlocks.ForceFire.canCatchFire(worldIn, pos.up(), EnumFacing.DOWN))
 	            {
 	                for (int j1 = 0; j1 < 2; ++j1)
 	                {

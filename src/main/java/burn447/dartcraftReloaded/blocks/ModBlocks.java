@@ -51,7 +51,7 @@ public class ModBlocks {
     
     
     
-    public static BlockBoesg Boesg = new BlockBoesg("Boesg");
+    public static BlockForceFire ForceFire = new BlockForceFire("Force_Fire");
     
     
     
@@ -93,10 +93,10 @@ public class ModBlocks {
                 forceTorch,
                 timetorch,
                 
-                Boesg
+                ForceFire
         );
         
-        
+        BlockForceFire.init();
         //BlockBoesg.init();
     }
 
@@ -129,7 +129,7 @@ public class ModBlocks {
                 forceTorch.createItemBlock(),
                 timetorch.createItemBlock(),
                 
-                Boesg.createItemBlock()
+                ForceFire.createItemBlock()
         );
 
     }
@@ -164,7 +164,7 @@ public class ModBlocks {
         forceTorch.registerItemModel(Item.getItemFromBlock(forceTorch));
         timetorch.registerItemModel(Item.getItemFromBlock(timetorch));
 
-        Boesg.registerItemModel(Item.getItemFromBlock(Boesg));
+        ForceFire.registerItemModel(Item.getItemFromBlock(ForceFire));
     }
 
     public static void registerNames() {

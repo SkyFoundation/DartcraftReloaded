@@ -5,7 +5,7 @@ import burn447.dartcraftReloaded.Handlers.DCRCompatHandler;
 import burn447.dartcraftReloaded.Handlers.DCROreDictionaryHandler;
 import burn447.dartcraftReloaded.Items.ModItems;
 import burn447.dartcraftReloaded.advancements.ModTriggers;
-import burn447.dartcraftReloaded.blocks.BlockBoesg;
+import burn447.dartcraftReloaded.blocks.BlockForceFire;
 import burn447.dartcraftReloaded.blocks.ModBlocks;
 import burn447.dartcraftReloaded.tileEntity.TileEntityForceFurnace;
 import burn447.dartcraftReloaded.tileEntity.TileEntityInfuser;

@@ -4,7 +4,7 @@ import burn447.dartcraftReloaded.Fluids.ModFluids;
 import burn447.dartcraftReloaded.Handlers.*;
 import burn447.dartcraftReloaded.Items.ModItems;
 import burn447.dartcraftReloaded.advancements.ModTriggers;
-import burn447.dartcraftReloaded.blocks.BlockBoesg;
+import burn447.dartcraftReloaded.blocks.BlockForceFire;
 import burn447.dartcraftReloaded.blocks.ModBlocks;
 import burn447.dartcraftReloaded.client.tabDartcraft;
 import burn447.dartcraftReloaded.proxy.CommonProxy;
@@ -100,7 +100,7 @@ public class dartcraftReloaded {
         DCRPacketHandler.init();
         ModBlocks.registerOreDict();
         
-        BlockBoesg.init();
+        BlockForceFire.init();
     }
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e){

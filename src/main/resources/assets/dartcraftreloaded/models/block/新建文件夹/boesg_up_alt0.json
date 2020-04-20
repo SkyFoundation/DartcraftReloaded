@@ -1,7 +1,0 @@
-{
-    "parent": "dartcraftreloaded:block/boesg_up_alt",
-    "textures": {
-        "particle": "dartcraftreloaded:block/boesg_layer_0",
-        "fire": "dartcraftreloaded:block/boesg_layer_0"
-    }
-}
