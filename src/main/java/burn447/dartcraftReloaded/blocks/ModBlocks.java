@@ -51,7 +51,7 @@ public class ModBlocks {
     
     
     
-    public static BlockForceFire ForceFire = new BlockForceFire("Force_Fire");
+    public static BlockForceFire ForceFire = new BlockForceFire("force_fire");
     
     
     
