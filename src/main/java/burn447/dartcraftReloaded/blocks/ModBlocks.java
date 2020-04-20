@@ -45,12 +45,24 @@ public class ModBlocks {
     public static BlockForceBrick forceBrickPurple = new BlockForceBrick("forceBrickPurple");
     public static BlockForceBrick forceBrickGray = new BlockForceBrick("forceBrickGray");
     public static BlockForceBrick forceBrick = new BlockForceBrick("forceBrick");
-
     //Torches
     public static BlockForceTorch forceTorch = new BlockForceTorch("forceTorch");
     public static BlockTimetorch timetorch = new BlockTimetorch("timeTorch");
+    
+    
+    
+    public static BlockBoesg Boesg = new BlockBoesg("Boesg");
+    
+    
+    
+    
+    
 
     public static void register(IForgeRegistry<Block> registry) {
+    	
+    	
+    	
+    	
         registry.registerAll(
                 orePower,
                 forceSapling,
@@ -79,9 +91,13 @@ public class ModBlocks {
                 forceBrickGray,
                 forceBrick,
                 forceTorch,
-                timetorch
+                timetorch,
+                
+                Boesg
         );
-
+        
+        
+        BlockBoesg.init();
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry) {
@@ -111,7 +127,9 @@ public class ModBlocks {
                 forceBrickGray.createItemBlock(),
                 forceBrick.createItemBlock(),
                 forceTorch.createItemBlock(),
-                timetorch.createItemBlock()
+                timetorch.createItemBlock(),
+                
+                Boesg.createItemBlock()
         );
 
     }
@@ -146,7 +164,7 @@ public class ModBlocks {
         forceTorch.registerItemModel(Item.getItemFromBlock(forceTorch));
         timetorch.registerItemModel(Item.getItemFromBlock(timetorch));
 
-
+        Boesg.registerItemModel(Item.getItemFromBlock(Boesg));
     }
 
     public static void registerNames() {
@@ -172,5 +190,6 @@ public class ModBlocks {
         forceBrickRed.initOreDict();
         forceBrickWhite.initOreDict();
         forceBrickYellow.initOreDict();
+        //Boesg.initOreDict();
     }
 }

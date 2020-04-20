@@ -5,6 +5,7 @@ import burn447.dartcraftReloaded.Handlers.DCRCompatHandler;
 import burn447.dartcraftReloaded.Handlers.DCROreDictionaryHandler;
 import burn447.dartcraftReloaded.Items.ModItems;
 import burn447.dartcraftReloaded.advancements.ModTriggers;
+import burn447.dartcraftReloaded.blocks.BlockBoesg;
 import burn447.dartcraftReloaded.blocks.ModBlocks;
 import burn447.dartcraftReloaded.tileEntity.TileEntityForceFurnace;
 import burn447.dartcraftReloaded.tileEntity.TileEntityInfuser;
@@ -44,6 +45,9 @@ public class CommonProxy {
     public void registerSmeltingRecipes() {
         GameRegistry.addSmelting(ModBlocks.orePower, new ItemStack(ModItems.gemForceGem, 2), 2.0F);
         GameRegistry.addSmelting(ModBlocks.forceLog, new ItemStack(ModItems.goldenPowerSource), 2.0F);
+        
+        
+        
     }
 
     @Mod.EventHandler
