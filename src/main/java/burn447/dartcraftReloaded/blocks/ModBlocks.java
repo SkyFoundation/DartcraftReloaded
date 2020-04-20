@@ -97,7 +97,7 @@ public class ModBlocks {
         );
         
         
-        BlockBoesg.init();
+        //BlockBoesg.init();
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry) {

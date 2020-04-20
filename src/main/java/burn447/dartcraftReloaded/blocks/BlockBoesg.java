@@ -48,17 +48,6 @@ public class BlockBoesg extends BlockFire
 
 	protected String name;
     
-	    
-	 //protected BlockBoesg()
-    //{
-       // super();
-       // this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)).withProperty(UPPER, Boolean.valueOf(false)));
-       // this.setTickRandomly(true);
-    //}
- 
- 
-	 
-
 	    public BlockBoesg(String name)
 	    {
 	    	//super(Material.FIRE);
@@ -127,6 +116,7 @@ public class BlockBoesg extends BlockFire
 	    }
 	    */
 
+	    //@Override
 	    public static void init()
 	    {
 	    	//Blocks.FIRE.setFireInfo(Blocks.TNT, 15, 100);
@@ -174,14 +164,7 @@ public class BlockBoesg extends BlockFire
 	        */
 	    }
 
-	    
-	    public void setFireInfo(Block blockIn, int encouragement, int flammability)
-	    {
-	        if (blockIn == Blocks.AIR) throw new IllegalArgumentException("Tried to set air on fire... This is bad.");
-	        this.encouragements.put(blockIn, Integer.valueOf(encouragement));
-	        this.flammabilities.put(blockIn, Integer.valueOf(flammability));
-	    }
-	    
+	   
 
 	    /**
 	     * @deprecated call via {@link IBlockState#getCollisionBoundingBox(IBlockAccess,BlockPos)} whenever possible.
