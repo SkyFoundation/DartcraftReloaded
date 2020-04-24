@@ -7,8 +7,6 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 
-import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.CAPABILITY_TOOLMOD;
-
 /**
  * Created by BURN447 on 6/16/2018.
  */

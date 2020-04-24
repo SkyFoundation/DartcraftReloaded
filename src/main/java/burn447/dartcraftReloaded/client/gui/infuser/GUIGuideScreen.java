@@ -2,9 +2,7 @@ package burn447.dartcraftReloaded.client.gui.infuser;
 
 import burn447.dartcraftReloaded.util.References;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
 public class GUIGuideScreen extends GuiScreen {
 

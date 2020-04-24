@@ -1,14 +1,10 @@
 package burn447.dartcraftReloaded.Potion.Effects;
 
 import burn447.dartcraftReloaded.Handlers.DCRPotionHandler;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.MathHelper;
 
 import javax.vecmath.Vector3d;
 import java.util.List;

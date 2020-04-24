@@ -1,6 +1,5 @@
 package burn447.dartcraftReloaded.Events;
 
-import burn447.dartcraftReloaded.Handlers.DCRPotionHandler;
 import burn447.dartcraftReloaded.Items.Tools.ItemMagnetGlove;
 import burn447.dartcraftReloaded.Potion.Effects.EffectMagnet;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +10,6 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.*;

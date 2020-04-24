@@ -4,7 +4,6 @@ import burn447.dartcraftReloaded.Fluids.ModFluids;
 import burn447.dartcraftReloaded.Handlers.*;
 import burn447.dartcraftReloaded.Items.ModItems;
 import burn447.dartcraftReloaded.advancements.ModTriggers;
-import burn447.dartcraftReloaded.blocks.BlockForceFire;
 import burn447.dartcraftReloaded.blocks.ModBlocks;
 import burn447.dartcraftReloaded.client.tabDartcraft;
 import burn447.dartcraftReloaded.proxy.CommonProxy;
@@ -32,8 +31,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -99,8 +96,6 @@ public class dartcraftReloaded {
         DCREventHandler.init();
         DCRPacketHandler.init();
         ModBlocks.registerOreDict();
-        
-        BlockForceFire.init();
     }
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e){

@@ -1,15 +1,14 @@
 package burn447.dartcraftReloaded.blocks;
 
+import burn447.dartcraftReloaded.blocks.fire.BlockForceFire;
+import burn447.dartcraftReloaded.blocks.fire.FireNether;
 import burn447.dartcraftReloaded.blocks.torch.BlockForceTorch;
 import burn447.dartcraftReloaded.blocks.torch.BlockTimetorch;
-import burn447.dartcraftReloaded.config.ConfigHandler;
 import burn447.dartcraftReloaded.dartcraftReloaded;
-import burn447.dartcraftReloaded.util.References;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
-import net.minecraftforge.common.config.Config;
 import net.minecraftforge.registries.IForgeRegistry;
 
 /**
@@ -50,8 +49,8 @@ public class ModBlocks {
     public static BlockTimetorch timetorch = new BlockTimetorch("timeTorch");
     
     
-    
-    public static BlockForceFire ForceFire = new BlockForceFire("force_fire");
+    //fires
+    public static BlockForceFire fireNether = new FireNether("fire_nether");
     
     
     
@@ -92,12 +91,10 @@ public class ModBlocks {
                 forceBrick,
                 forceTorch,
                 timetorch,
-                
-                ForceFire
+                fireNether
         );
         
-        BlockForceFire.init();
-        //BlockBoesg.init();
+
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry) {
@@ -127,9 +124,9 @@ public class ModBlocks {
                 forceBrickGray.createItemBlock(),
                 forceBrick.createItemBlock(),
                 forceTorch.createItemBlock(),
-                timetorch.createItemBlock(),
+                timetorch.createItemBlock()
                 
-                ForceFire.createItemBlock()
+               // FireNether.createItemBlock()
         );
 
     }
@@ -164,7 +161,7 @@ public class ModBlocks {
         forceTorch.registerItemModel(Item.getItemFromBlock(forceTorch));
         timetorch.registerItemModel(Item.getItemFromBlock(timetorch));
 
-        ForceFire.registerItemModel(Item.getItemFromBlock(ForceFire));
+    //    ForceFire.registerItemModel(Item.getItemFromBlock(ForceFire));
     }
 
     public static void registerNames() {

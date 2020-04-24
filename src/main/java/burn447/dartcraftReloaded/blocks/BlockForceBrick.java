@@ -1,7 +1,6 @@
 package burn447.dartcraftReloaded.blocks;
 
 import burn447.dartcraftReloaded.dartcraftReloaded;
-import net.minecraft.block.BlockColored;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;

@@ -3,7 +3,6 @@ package burn447.dartcraftReloaded.Items;
 
 import burn447.dartcraftReloaded.dartcraftReloaded;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 
 
 //工具核心

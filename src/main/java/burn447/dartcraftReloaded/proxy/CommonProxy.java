@@ -1,11 +1,9 @@
 package burn447.dartcraftReloaded.proxy;
 
 import burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler;
-import burn447.dartcraftReloaded.Handlers.DCRCompatHandler;
 import burn447.dartcraftReloaded.Handlers.DCROreDictionaryHandler;
 import burn447.dartcraftReloaded.Items.ModItems;
 import burn447.dartcraftReloaded.advancements.ModTriggers;
-import burn447.dartcraftReloaded.blocks.BlockForceFire;
 import burn447.dartcraftReloaded.blocks.ModBlocks;
 import burn447.dartcraftReloaded.tileEntity.TileEntityForceFurnace;
 import burn447.dartcraftReloaded.tileEntity.TileEntityInfuser;
@@ -15,7 +13,6 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;

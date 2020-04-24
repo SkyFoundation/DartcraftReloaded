@@ -1,6 +1,5 @@
 package burn447.dartcraftReloaded.Handlers;
 
-import burn447.dartcraftReloaded.Items.ItemForcePack;
 import burn447.dartcraftReloaded.client.gui.belt.GUIForceBelt;
 import burn447.dartcraftReloaded.client.gui.furnace.GUIFurnace;
 import burn447.dartcraftReloaded.client.gui.infuser.GUIInfuser;

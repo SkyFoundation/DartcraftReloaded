@@ -2,7 +2,6 @@ package burn447.dartcraftReloaded.blocks;
 
 import burn447.dartcraftReloaded.dartcraftReloaded;
 import net.minecraft.block.BlockRotatedPillar;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;

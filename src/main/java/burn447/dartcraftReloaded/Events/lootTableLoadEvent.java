@@ -1,14 +1,11 @@
 package burn447.dartcraftReloaded.Events;
 
 import burn447.dartcraftReloaded.Items.ModItems;
-import burn447.dartcraftReloaded.lootTables.DCRLootTables;
 import burn447.dartcraftReloaded.util.References;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.*;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.SetCount;
-import net.minecraft.world.storage.loot.functions.SetMetadata;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 

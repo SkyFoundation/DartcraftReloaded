@@ -7,8 +7,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.awt.*;
-
 public class EntityNonBurnableItem extends EntityItem {
     public EntityNonBurnableItem(World worldIn, double x, double y, double z) {
         super(worldIn, x, y, z);

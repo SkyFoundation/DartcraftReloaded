@@ -51,6 +51,7 @@ public class ItemForceShovel extends ItemSpade {
         this.setCreativeTab(dartcraftReloaded.creativeTab);
         this.name = name;
         this.attackDamage = 2.5F;
+
     }
 
     public void registerItemModel() {

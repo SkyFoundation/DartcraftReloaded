@@ -1,8 +1,6 @@
 package burn447.dartcraftReloaded.client.gui.belt;
 
-import burn447.dartcraftReloaded.Items.ItemForcePack;
 import burn447.dartcraftReloaded.container.ContainerItemForceBelt;
-import burn447.dartcraftReloaded.container.ContainerItemForcePack;
 import burn447.dartcraftReloaded.util.References;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
