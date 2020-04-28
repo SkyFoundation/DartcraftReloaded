@@ -11,31 +11,31 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ItemInertCore extends ItemBase {
-    public ItemInertCore(String name) {
-        super(name);
-    }
+	public ItemInertCore(String name) {
+		super(name);
+	}
 
-    /* Non Flamable */
+	/* Non Flamable */
 
-    @Override
-    public boolean hasCustomEntity(ItemStack stack) {
-        return true;
-    }
+	@Override
+	public boolean hasCustomEntity(ItemStack stack) {
+		return true;
+	}
 
-    @Nonnull
+	@Nonnull
 
-    @Nullable
-    @Override
-    public Entity createEntity(World world, Entity location, ItemStack itemstack) {
-        EntityItem entity = new EntityNonBurnableItem(world, location.posX, location.posY, location.posZ, itemstack);
-        if (location instanceof EntityItem) {
-            NBTTagCompound tag = new NBTTagCompound();
-            location.writeToNBT(tag);
-            entity.setPickupDelay(tag.getShort("PickupDelay"));
-        }
-        entity.motionX = location.motionX;
-        entity.motionY = location.motionY;
-        entity.motionZ = location.motionZ;
-        return entity;
-    }
+	@Nullable
+	@Override
+	public Entity createEntity(World world, Entity location, ItemStack itemstack) {
+		EntityItem entity = new EntityNonBurnableItem(world, location.posX, location.posY, location.posZ, itemstack);
+		if (location instanceof EntityItem) {
+			NBTTagCompound tag = new NBTTagCompound();
+			location.writeToNBT(tag);
+			entity.setPickupDelay(tag.getShort("PickupDelay"));
+		}
+		entity.motionX = location.motionX;
+		entity.motionY = location.motionY;
+		entity.motionZ = location.motionZ;
+		return entity;
+	}
 }

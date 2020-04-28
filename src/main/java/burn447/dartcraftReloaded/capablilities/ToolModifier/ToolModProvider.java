@@ -13,39 +13,37 @@ import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.CAPABILITY
 
 public class ToolModProvider implements ICapabilitySerializable<NBTBase>, ICapabilityProvider {
 
-    private EnumFacing facing = null;
+	private EnumFacing facing = null;
 
-    private IToolModifier instance = null;
+	private IToolModifier instance = null;
 
+	public ToolModProvider(Capability<IToolModifier> capability, EnumFacing facing) {
+		this.facing = facing;
+		this.instance = CAPABILITY_TOOLMOD.getDefaultInstance();
+	}
 
-    public ToolModProvider(Capability<IToolModifier> capability, EnumFacing facing){
-        this.facing = facing;
-        this.instance = CAPABILITY_TOOLMOD.getDefaultInstance();
-    }
+	@Override
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		return capability == CAPABILITY_TOOLMOD;
+	}
 
+	@Nullable
+	@Override
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		return capability == CAPABILITY_TOOLMOD ? CAPABILITY_TOOLMOD.<T>cast(instance) : null;
+	}
 
-    @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CAPABILITY_TOOLMOD;
-    }
+	@Override
+	public NBTBase serializeNBT() {
+		return CAPABILITY_TOOLMOD.getStorage().writeNBT(CAPABILITY_TOOLMOD, instance, null);
+	}
 
-    @Nullable
-    @Override
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == CAPABILITY_TOOLMOD ? CAPABILITY_TOOLMOD.<T> cast(instance) : null;
-    }
+	@Override
+	public void deserializeNBT(NBTBase nbt) {
+		CAPABILITY_TOOLMOD.getStorage().readNBT(CAPABILITY_TOOLMOD, instance, null, nbt);
+	}
 
-    @Override
-    public NBTBase serializeNBT() {
-        return CAPABILITY_TOOLMOD.getStorage().writeNBT(CAPABILITY_TOOLMOD, instance, null);
-    }
-
-    @Override
-    public void deserializeNBT(NBTBase nbt) {
-        CAPABILITY_TOOLMOD.getStorage().readNBT(CAPABILITY_TOOLMOD, instance, null, nbt);
-    }
-
-    public final Capability<IToolModifier> getCapability(){
-        return CAPABILITY_TOOLMOD;
-    }
+	public final Capability<IToolModifier> getCapability() {
+		return CAPABILITY_TOOLMOD;
+	}
 }

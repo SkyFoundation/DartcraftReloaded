@@ -15,25 +15,26 @@ import net.minecraftforge.fml.relauncher.Side;
  */
 public class DCRPacketHandler {
 
-    public static final SimpleNetworkWrapper packetHandler = NetworkRegistry.INSTANCE.newSimpleChannel(References.modId);
+	public static final SimpleNetworkWrapper packetHandler = NetworkRegistry.INSTANCE
+			.newSimpleChannel(References.modId);
 
-    private static int id = 0;
+	private static int id = 0;
 
-    public static void init(){
-        packetHandler.registerMessage(InfuserMessage.class, InfuserMessage.class, id++, Side.SERVER);
-    }
+	public static void init() {
+		packetHandler.registerMessage(InfuserMessage.class, InfuserMessage.class, id++, Side.SERVER);
+	}
 
-    public static void sendToServer(IMessage message){
-        packetHandler.sendToServer(message);
-    }
+	public static void sendToServer(IMessage message) {
+		packetHandler.sendToServer(message);
+	}
 
-    public static void sendToClient(IMessage message, EntityPlayerMP player){
-        packetHandler.sendTo(message, player);
-    }
+	public static void sendToClient(IMessage message, EntityPlayerMP player) {
+		packetHandler.sendTo(message, player);
+	}
 
-    public static void sendPacket(Entity player, Packet<?> packet) {
-        if(player instanceof EntityPlayerMP && ((EntityPlayerMP) player).connection != null) {
-            ((EntityPlayerMP) player).connection.sendPacket(packet);
-        }
-    }
+	public static void sendPacket(Entity player, Packet<?> packet) {
+		if (player instanceof EntityPlayerMP && ((EntityPlayerMP) player).connection != null) {
+			((EntityPlayerMP) player).connection.sendPacket(packet);
+		}
+	}
 }

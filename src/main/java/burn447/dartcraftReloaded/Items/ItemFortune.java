@@ -18,47 +18,46 @@ import java.util.Random;
  */
 public class ItemFortune extends ItemBase {
 
-    private String name;
-    private String message;
-    private String[] fortunes = new String[186];
+	private String name;
+	private String message;
+	private String[] fortunes = new String[186];
 
-    public ItemFortune(String name) {
-        super(name);
-        this.name = name;
-        this.setCreativeTab(dartcraftReloaded.creativeTab);
+	public ItemFortune(String name) {
+		super(name);
+		this.name = name;
+		this.setCreativeTab(dartcraftReloaded.creativeTab);
 
-        Arrays.fill(fortunes, "0");
+		Arrays.fill(fortunes, "0");
 
-        for(int i = 0; i <= 185; i++) {
-            fortunes[i] = "text.dartcraftReloaded.fortune" + i;
-        }
-    }
+		for (int i = 0; i <= 185; i++) {
+			fortunes[i] = "text.dartcraftReloaded.fortune" + i;
+		}
+	}
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        NBTTagCompound nbt;
-        ItemStack stack = playerIn.getHeldItem(handIn);
-        if(stack.hasTagCompound()) {
-            nbt = stack.getTagCompound();
-        }
-        else {
-            nbt = new NBTTagCompound();
-        }
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+		NBTTagCompound nbt;
+		ItemStack stack = playerIn.getHeldItem(handIn);
+		if (stack.hasTagCompound()) {
+			nbt = stack.getTagCompound();
+		} else {
+			nbt = new NBTTagCompound();
+		}
 
-        if(!nbt.hasKey("message")) {
-            addMessage(stack, nbt);
-        }
+		if (!nbt.hasKey("message")) {
+			addMessage(stack, nbt);
+		}
 
-        if(!worldIn.isRemote){
-            playerIn.sendMessage(new TextComponentString(I18n.format(nbt.getString("message"))));
-        }
-        return super.onItemRightClick(worldIn, playerIn, handIn);
-    }
+		if (!worldIn.isRemote) {
+			playerIn.sendMessage(new TextComponentString(I18n.format(nbt.getString("message"))));
+		}
+		return super.onItemRightClick(worldIn, playerIn, handIn);
+	}
 
-    private void addMessage(ItemStack stack, NBTTagCompound nbt) {
-        Random generator = new Random();
-        int rand = generator.nextInt(fortunes.length);
-        nbt.setString("message", fortunes[rand]);
-        stack.setTagCompound(nbt);
-    }
+	private void addMessage(ItemStack stack, NBTTagCompound nbt) {
+		Random generator = new Random();
+		int rand = generator.nextInt(fortunes.length);
+		nbt.setString("message", fortunes[rand]);
+		stack.setTagCompound(nbt);
+	}
 }

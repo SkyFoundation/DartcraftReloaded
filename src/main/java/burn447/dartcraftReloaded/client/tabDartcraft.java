@@ -10,12 +10,12 @@ import net.minecraft.item.ItemStack;
  */
 public class tabDartcraft extends CreativeTabs {
 
-    public tabDartcraft(){
-        super(References.modId);
-    }
+	public tabDartcraft() {
+		super(References.modId);
+	}
 
-    @Override
-    public ItemStack createIcon() {
-        return new ItemStack(ModItems.gemForceGem);
-    }
+	@Override
+	public ItemStack createIcon() {
+		return new ItemStack(ModItems.gemForceGem);
+	}
 }

@@ -5,29 +5,39 @@ package burn447.dartcraftReloaded.capablilities.PlayerModifier;
  */
 public interface IPlayerModifier {
 
-    //Damage
-    float getAttackDamage();
-    void setAttackDamage(float newDamage);
-    void addAttackDamage(float newDamage);
+	// Damage
+	float getAttackDamage();
 
-    //Wing
-    float getWingPower();
-    void setWingPower(float newWingPower);
+	void setAttackDamage(float newDamage);
 
-    float getFlightTimer();
-    void subtractFlightTimer();
-    void setFlightTimer(float newFlightCounter);
+	void addAttackDamage(float newDamage);
 
-    //Heat
-    float getHeatDamage();
-    void setHeatDamage(float newDamage);
-    void addHeatDamage(float newDamage);
+	// Wing
+	float getWingPower();
 
-    float getDamage();
-    void setDamage(float newDamage);
+	void setWingPower(float newWingPower);
 
-    //Luck
-    int getLuckLevel();
-    void setLuckLevel(int newLuck);
-    void incrementLuckLevel(int newLuck);
+	float getFlightTimer();
+
+	void subtractFlightTimer();
+
+	void setFlightTimer(float newFlightCounter);
+
+	// Heat
+	float getHeatDamage();
+
+	void setHeatDamage(float newDamage);
+
+	void addHeatDamage(float newDamage);
+
+	float getDamage();
+
+	void setDamage(float newDamage);
+
+	// Luck
+	int getLuckLevel();
+
+	void setLuckLevel(int newLuck);
+
+	void incrementLuckLevel(int newLuck);
 }

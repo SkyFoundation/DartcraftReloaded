@@ -19,88 +19,85 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 public class BlockForceLog extends BlockRotatedPillar {
 
-    private String name;
-    private String oreName;
+	private String name;
+	private String oreName;
 
-    public BlockForceLog(String name) {
-        super(Material.WOOD);
-        this.setHardness(1.0F);
-        this.setHarvestLevel("axe", 0);
-        this.setCreativeTab(dartcraftReloaded.creativeTab);
-        this.setRegistryName(name);
-        this.setTranslationKey(name);
-        this.setLightOpacity(1);
-        this.name = name;
-        this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.Y);
-    }
+	public BlockForceLog(String name) {
+		super(Material.WOOD);
+		this.setHardness(1.0F);
+		this.setHarvestLevel("axe", 0);
+		this.setCreativeTab(dartcraftReloaded.creativeTab);
+		this.setRegistryName(name);
+		this.setTranslationKey(name);
+		this.setLightOpacity(1);
+		this.name = name;
+		this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.Y);
+	}
 
-    public BlockForceLog(String name, String oreName) {
-        super(Material.WOOD);
-        this.setHardness(1.0F);
-        this.setHarvestLevel("axe", 0);
-        this.setCreativeTab(dartcraftReloaded.creativeTab);
-        this.setRegistryName(name);
-        this.setTranslationKey(name);
-        this.setLightOpacity(1);
-        this.name = name;
-        this.oreName = oreName;
-        this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.Y);
-    }
+	public BlockForceLog(String name, String oreName) {
+		super(Material.WOOD);
+		this.setHardness(1.0F);
+		this.setHarvestLevel("axe", 0);
+		this.setCreativeTab(dartcraftReloaded.creativeTab);
+		this.setRegistryName(name);
+		this.setTranslationKey(name);
+		this.setLightOpacity(1);
+		this.name = name;
+		this.oreName = oreName;
+		this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.Y);
+	}
 
+	public void registerItemModel(Item itemBlock) {
+		dartcraftReloaded.proxy.registerItemRenderer(itemBlock, 0, name);
+	}
 
+	public Item createItemBlock() {
+		return new ItemBlock(this).setRegistryName(getRegistryName());
+	}
 
-    public void registerItemModel(Item itemBlock) {
-        dartcraftReloaded.proxy.registerItemRenderer(itemBlock, 0, name);
-    }
+	@Override
+	public BlockForceLog setCreativeTab(CreativeTabs tab) {
+		super.setCreativeTab(tab);
+		return this;
+	}
 
-    public Item createItemBlock() {
-        return new ItemBlock(this).setRegistryName(getRegistryName());
-    }
+	@Override
+	public BlockStateContainer getBlockState() {
+		return super.getBlockState();
+	}
 
+	@Override
+	public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return true;
+	}
 
-    @Override
-    public BlockForceLog setCreativeTab(CreativeTabs tab) {
-        super.setCreativeTab(tab);
-        return this;
-    }
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		int i = 4;
+		int j = 5;
 
-    @Override
-    public BlockStateContainer getBlockState() {
-        return super.getBlockState();
-    }
+		if (worldIn.isAreaLoaded(pos.add(-5, -5, -5), pos.add(5, 5, 5))) {
+			for (BlockPos blockpos : BlockPos.getAllInBox(pos.add(-4, -4, -4), pos.add(4, 4, 4))) {
+				IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
-    @Override
-    public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return true;
-    }
+				if (iblockstate.getBlock().isLeaves(iblockstate, worldIn, blockpos)) {
+					iblockstate.getBlock().beginLeavesDecay(iblockstate, worldIn, blockpos);
+				}
+			}
+		}
+	}
 
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        int i = 4;
-        int j = 5;
+	@Override
+	public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
+		return 30;
+	}
 
-        if (worldIn.isAreaLoaded(pos.add(-5, -5, -5), pos.add(5, 5, 5))) {
-            for (BlockPos blockpos : BlockPos.getAllInBox(pos.add(-4, -4, -4), pos.add(4, 4, 4))) {
-                IBlockState iblockstate = worldIn.getBlockState(blockpos);
+	@Override
+	public boolean isFlammable(IBlockAccess world, BlockPos pos, EnumFacing face) {
+		return true;
+	}
 
-                if (iblockstate.getBlock().isLeaves(iblockstate, worldIn, blockpos)) {
-                    iblockstate.getBlock().beginLeavesDecay(iblockstate, worldIn, blockpos);
-                }
-            }
-        }
-    }
-
-    @Override
-    public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
-        return 30;
-    }
-
-    @Override
-    public boolean isFlammable(IBlockAccess world, BlockPos pos, EnumFacing face) {
-        return true;
-    }
-
-    public void initOreDict() {
-        OreDictionary.registerOre(oreName, this);
-    }
+	public void initOreDict() {
+		OreDictionary.registerOre(oreName, this);
+	}
 }

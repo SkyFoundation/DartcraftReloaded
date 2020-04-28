@@ -10,109 +10,107 @@ import java.util.concurrent.Callable;
  * Created by BURN447 on 6/7/2018.
  */
 public class ForceRodFactory implements Callable<IForceRodModifier> {
-    @Override
-    public IForceRodModifier call() throws Exception {
-        return new IForceRodModifier() {
+	@Override
+	public IForceRodModifier call() throws Exception {
+		return new IForceRodModifier() {
 
-            boolean[] rodOfHealing = {false, false, false};
-            boolean camo = false;
-            boolean ender = false;
-            boolean sight = false;
+			boolean[] rodOfHealing = { false, false, false };
+			boolean camo = false;
+			boolean ender = false;
+			boolean sight = false;
 
-            BlockPos homeLocation = null;
+			BlockPos homeLocation = null;
 
-            @Override
-            public boolean isRodOfHealing(int level) {
-                return rodOfHealing[level - 1];
-            }
+			@Override
+			public boolean isRodOfHealing(int level) {
+				return rodOfHealing[level - 1];
+			}
 
-            @Override
-            public void setRodOfHealing(boolean newVal, int level) {
-                rodOfHealing[level - 1] = newVal;
-            }
+			@Override
+			public void setRodOfHealing(boolean newVal, int level) {
+				rodOfHealing[level - 1] = newVal;
+			}
 
-            @Override
-            public boolean hasCamoModifier() {
-                return camo;
-            }
+			@Override
+			public boolean hasCamoModifier() {
+				return camo;
+			}
 
-            @Override
-            public void setCamoModifier(boolean newVal) {
-                camo = newVal;
-            }
+			@Override
+			public void setCamoModifier(boolean newVal) {
+				camo = newVal;
+			}
 
-            @Override
-            public BlockPos getHomeLocation() {
-                return homeLocation;
-            }
+			@Override
+			public BlockPos getHomeLocation() {
+				return homeLocation;
+			}
 
-            @Override
-            public void setHomeLocation(BlockPos pos) {
-                homeLocation = pos;
-            }
+			@Override
+			public void setHomeLocation(BlockPos pos) {
+				homeLocation = pos;
+			}
 
-            @Override
-            public void teleportPlayerToLocation(EntityPlayer player, BlockPos pos) {
-                int x = pos.getX();
-                int y = pos.getY() + 1;
-                int z = pos.getZ();
+			@Override
+			public void teleportPlayerToLocation(EntityPlayer player, BlockPos pos) {
+				int x = pos.getX();
+				int y = pos.getY() + 1;
+				int z = pos.getZ();
 
-                player.attemptTeleport(x, y, z);
-            }
+				player.attemptTeleport(x, y, z);
+			}
 
-            @Override
-            public boolean hasEnderModifier() {
-                return ender;
-            }
+			@Override
+			public boolean hasEnderModifier() {
+				return ender;
+			}
 
-            @Override
-            public void setEnderModifier(boolean newVal) {
-                ender = newVal;
-            }
+			@Override
+			public void setEnderModifier(boolean newVal) {
+				ender = newVal;
+			}
 
-            @Override
-            public boolean isRodofEnder() {
-                return ender;
-            }
+			@Override
+			public boolean isRodofEnder() {
+				return ender;
+			}
 
-            @Override
-            public boolean hasSightModifier() {
-                return sight;
-            }
+			@Override
+			public boolean hasSightModifier() {
+				return sight;
+			}
 
-            @Override
-            public void setSightModifier(boolean newVal) {
-                sight = newVal;
-            }
+			@Override
+			public void setSightModifier(boolean newVal) {
+				sight = newVal;
+			}
 
-            /**
-             * Modifier: Light
-             * Items: Glowstone Dust
-             * Levels: 1
-             * Effect: Shows mobs through walls
-             */
+			/**
+			 * Modifier: Light Items: Glowstone Dust Levels: 1 Effect: Shows mobs through
+			 * walls
+			 */
 
-            boolean light;
+			boolean light;
 
-            @Override
-            public boolean hasLight() {
-                return light;
-            }
+			@Override
+			public boolean hasLight() {
+				return light;
+			}
 
-            @Override
-            public void setLight(boolean val) {
-                light = val;
-            }
+			@Override
+			public void setLight(boolean val) {
+				light = val;
+			}
 
-            @Override
-            public NBTTagCompound serializeNBT() {
-                return null;
-            }
+			@Override
+			public NBTTagCompound serializeNBT() {
+				return null;
+			}
 
-            @Override
-            public void deserializeNBT(NBTTagCompound nbt) {
+			@Override
+			public void deserializeNBT(NBTTagCompound nbt) {
 
-            }
-        };
-    }
+			}
+		};
+	}
 }

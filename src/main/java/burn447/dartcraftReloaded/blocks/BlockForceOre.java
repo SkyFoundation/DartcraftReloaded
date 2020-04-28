@@ -13,35 +13,31 @@ import java.util.Random;
  */
 public class BlockForceOre extends BlockBase {
 
-    public BlockForceOre(String name) {
-        super(Material.ROCK, name);
-        setHardness(3f);
-        setResistance(5f);
-        this.setRegistryName(name);
-        this.setTranslationKey(name);
-    }
+	public BlockForceOre(String name) {
+		super(Material.ROCK, name);
+		setHardness(3f);
+		setResistance(5f);
+		this.setRegistryName(name);
+		this.setTranslationKey(name);
+	}
 
-    @Override
-    public BlockForceOre setCreativeTab(CreativeTabs tab) {
-        super.setCreativeTab(tab);
-        return this;
-    }
+	@Override
+	public BlockForceOre setCreativeTab(CreativeTabs tab) {
+		super.setCreativeTab(tab);
+		return this;
+	}
 
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune){
-        return ModItems.gemForceGem;
-    }
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return ModItems.gemForceGem;
+	}
 
-    public int quantityDroppedWithBonus(int fortune, Random random)
-    {
-        return this.quantityDropped(random) + random.nextInt(fortune + 1);
-    }
+	public int quantityDroppedWithBonus(int fortune, Random random) {
+		return this.quantityDropped(random) + random.nextInt(fortune + 1);
+	}
 
-    public int quantityDropped(Random random)
-    {
-        return 2 + random.nextInt(2);
-    }
-
-
+	public int quantityDropped(Random random) {
+		return 2 + random.nextInt(2);
+	}
 
 }

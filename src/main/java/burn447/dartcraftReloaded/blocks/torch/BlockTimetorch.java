@@ -14,28 +14,28 @@ import javax.annotation.Nullable;
 
 public class BlockTimetorch extends BlockTorch implements ITileEntityProvider {
 
-    private String name;
+	private String name;
 
-    public BlockTimetorch(String name) {
-        this.setSoundType(SoundType.WOOD);
-        this.setLightLevel(0.9375F);
-        this.setTranslationKey(name);
-        this.setRegistryName(name);
-        this.name = name;
-        this.setCreativeTab(dartcraftReloaded.creativeTab);
-    }
+	public BlockTimetorch(String name) {
+		this.setSoundType(SoundType.WOOD);
+		this.setLightLevel(0.9375F);
+		this.setTranslationKey(name);
+		this.setRegistryName(name);
+		this.name = name;
+		this.setCreativeTab(dartcraftReloaded.creativeTab);
+	}
 
-    public void registerItemModel(Item itemBlock) {
-        dartcraftReloaded.proxy.registerItemRenderer(itemBlock, 0, name);
-    }
+	public void registerItemModel(Item itemBlock) {
+		dartcraftReloaded.proxy.registerItemRenderer(itemBlock, 0, name);
+	}
 
-    public Item createItemBlock() {
-        return new ItemBlock(this).setRegistryName(getRegistryName());
-    }
+	public Item createItemBlock() {
+		return new ItemBlock(this).setRegistryName(getRegistryName());
+	}
 
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityTimeTorch();
-    }
+	@Nullable
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		return new TileEntityTimeTorch();
+	}
 }

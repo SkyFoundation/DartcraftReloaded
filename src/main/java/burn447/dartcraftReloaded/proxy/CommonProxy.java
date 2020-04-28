@@ -26,50 +26,49 @@ import java.lang.reflect.Method;
  */
 public class CommonProxy {
 
-    public void registerItemRenderer(Item item, int meta, String id) {
-    }
+	public void registerItemRenderer(Item item, int meta, String id) {
+	}
 
-    public String localize(String unlocalized, Object... args) {
-        return I18n.translateToLocalFormatted(unlocalized, args);
-    }
+	public String localize(String unlocalized, Object... args) {
+		return I18n.translateToLocalFormatted(unlocalized, args);
+	}
 
-    public void registerTileEntities() {
-        GameRegistry.registerTileEntity(TileEntityInfuser.class, References.modId + ":blockInfuser");
-        GameRegistry.registerTileEntity(TileEntityForceFurnace.class, References.modId + ":blockFurnace");
-        GameRegistry.registerTileEntity(TileEntityTimeTorch.class, References.modId + ":torchTime");
-    }
+	public void registerTileEntities() {
+		GameRegistry.registerTileEntity(TileEntityInfuser.class, References.modId + ":blockInfuser");
+		GameRegistry.registerTileEntity(TileEntityForceFurnace.class, References.modId + ":blockFurnace");
+		GameRegistry.registerTileEntity(TileEntityTimeTorch.class, References.modId + ":torchTime");
+	}
 
-    public void registerSmeltingRecipes() {
-        GameRegistry.addSmelting(ModBlocks.orePower, new ItemStack(ModItems.gemForceGem, 2), 2.0F);
-        GameRegistry.addSmelting(ModBlocks.forceLog, new ItemStack(ModItems.goldenPowerSource), 2.0F);
-        
-        
-        
-    }
+	public void registerSmeltingRecipes() {
+		GameRegistry.addSmelting(ModBlocks.orePower, new ItemStack(ModItems.gemForceGem, 2), 2.0F);
+		GameRegistry.addSmelting(ModBlocks.forceLog, new ItemStack(ModItems.goldenPowerSource), 2.0F);
 
-    @Mod.EventHandler
-    public void preInit(){
-        DCRCapabilityHandler.register();
-        DCROreDictionaryHandler.registerOreDictionary();
-    }
+	}
 
-    @Mod.EventHandler
-    public void init() {
-        Method method;
+	@Mod.EventHandler
+	public void preInit() {
+		DCRCapabilityHandler.register();
+		DCROreDictionaryHandler.registerOreDictionary();
+	}
 
-        method = ReflectionHelper.findMethod(CriteriaTriggers.class, "register", "func_192118_a", ICriterionTrigger.class);
+	@Mod.EventHandler
+	public void init() {
+		Method method;
 
-        method.setAccessible(true);
+		method = ReflectionHelper.findMethod(CriteriaTriggers.class, "register", "func_192118_a",
+				ICriterionTrigger.class);
 
-        for(int i = 0; i < ModTriggers.TRIGGER_ARRAY.length; i++) {
-            try {
-                method.invoke(null, ModTriggers.TRIGGER_ARRAY[i]);
-            }
-            catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+		method.setAccessible(true);
 
-    public void openGuideGUI(){}
+		for (int i = 0; i < ModTriggers.TRIGGER_ARRAY.length; i++) {
+			try {
+				method.invoke(null, ModTriggers.TRIGGER_ARRAY[i]);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void openGuideGUI() {
+	}
 }

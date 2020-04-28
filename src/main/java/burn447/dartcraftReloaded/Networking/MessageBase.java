@@ -12,18 +12,17 @@ import net.minecraftforge.fml.relauncher.Side;
  */
 public abstract class MessageBase<REQ extends IMessage> implements IMessage, IMessageHandler<REQ, REQ> {
 
-    @Override
-    public REQ onMessage(REQ message, MessageContext ctx) {
-        if(ctx.side == Side.SERVER){
-            handleServerSide(message, ctx.getServerHandler().player);
-        }
-        else{
-            handleClientSide(message, null);
-        }
-        return null;
-    }
+	@Override
+	public REQ onMessage(REQ message, MessageContext ctx) {
+		if (ctx.side == Side.SERVER) {
+			handleServerSide(message, ctx.getServerHandler().player);
+		} else {
+			handleClientSide(message, null);
+		}
+		return null;
+	}
 
-    public abstract void handleClientSide(REQ message, EntityPlayer player);
+	public abstract void handleClientSide(REQ message, EntityPlayer player);
 
-    public abstract void handleServerSide(REQ message, EntityPlayerMP player);
+	public abstract void handleServerSide(REQ message, EntityPlayerMP player);
 }

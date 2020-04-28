@@ -45,95 +45,98 @@ import static net.minecraftforge.fml.relauncher.Side.CLIENT;
 @Mod(modid = modId, name = References.name, version = References.version)
 public class dartcraftReloaded {
 
-    public static final tabDartcraft creativeTab = new tabDartcraft();
+	public static final tabDartcraft creativeTab = new tabDartcraft();
 
-    @Mod.Instance(modId)
-    public static dartcraftReloaded instance;
+	@Mod.Instance(modId)
+	public static dartcraftReloaded instance;
 
-    @SidedProxy(serverSide = "burn447.dartcraftReloaded.proxy.CommonProxy", clientSide = "burn447.dartcraftReloaded.proxy.ClientProxy")
-    public static CommonProxy proxy;
+	@SidedProxy(serverSide = "burn447.dartcraftReloaded.proxy.CommonProxy", clientSide = "burn447.dartcraftReloaded.proxy.ClientProxy")
+	public static CommonProxy proxy;
 
-    public static final ItemArmor.ArmorMaterial forceArmorMaterial = EnumHelper.addArmorMaterial("FORCE", modId + ":force", 15, new int[]{1, 2, 3, 1}, 0, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 4.0F);
-    public static final ItemTool.ToolMaterial forceToolMaterial = EnumHelper.addToolMaterial("FORCE", 3, 1561, 8.0F, 8.0F, 22);
+	public static final ItemArmor.ArmorMaterial forceArmorMaterial = EnumHelper.addArmorMaterial("FORCE",
+			modId + ":force", 15, new int[] { 1, 2, 3, 1 }, 0, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 4.0F);
+	public static final ItemTool.ToolMaterial forceToolMaterial = EnumHelper.addToolMaterial("FORCE", 3, 1561, 8.0F,
+			8.0F, 22);
 
-    static {
-        FluidRegistry.enableUniversalBucket();
-    }
+	static {
+		FluidRegistry.enableUniversalBucket();
+	}
 
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent e){
-        //System.out.println("Dartcraft Reloaded Pre-Init");
-        GameRegistry.registerWorldGenerator(new DCRWorldGen(), 3);
-        proxy.registerTileEntities();
-        DCRCapabilityHandler.register();
-        DCROreDictionaryHandler.registerOreDictionary();
-        DCRPotionHandler.preInit(e);
-        ModFluids.registerFluids();
-        ModFluids.setUpFluids();
+	@Mod.EventHandler
+	public void preInit(FMLPreInitializationEvent e) {
+		// System.out.println("Dartcraft Reloaded Pre-Init");
+		GameRegistry.registerWorldGenerator(new DCRWorldGen(), 3);
+		proxy.registerTileEntities();
+		DCRCapabilityHandler.register();
+		DCROreDictionaryHandler.registerOreDictionary();
+		DCRPotionHandler.preInit(e);
+		ModFluids.registerFluids();
+		ModFluids.setUpFluids();
 
-    }
+	}
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent e){
-        //System.out.println("Dartcraft Reloaded Init");
-        NetworkRegistry.INSTANCE.registerGuiHandler(dartcraftReloaded.instance, new DCRGUIHandler());
-        GameRegistry.registerFuelHandler(new DCRFuelHandler());
-        Method method;
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent e) {
+		// System.out.println("Dartcraft Reloaded Init");
+		NetworkRegistry.INSTANCE.registerGuiHandler(dartcraftReloaded.instance, new DCRGUIHandler());
+		GameRegistry.registerFuelHandler(new DCRFuelHandler());
+		Method method;
 
-        method = ReflectionHelper.findMethod(CriteriaTriggers.class, "register", "func_192118_a", ICriterionTrigger.class);
+		method = ReflectionHelper.findMethod(CriteriaTriggers.class, "register", "func_192118_a",
+				ICriterionTrigger.class);
 
-        method.setAccessible(true);
+		method.setAccessible(true);
 
-        for(int i = 0; i < ModTriggers.TRIGGER_ARRAY.length; i++) {
-            try {
-                method.invoke(null, ModTriggers.TRIGGER_ARRAY[i]);
-            }
-            catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                ex.printStackTrace();
-            }
-        }
-        proxy.registerSmeltingRecipes();
-        DCREventHandler.init();
-        DCRPacketHandler.init();
-        ModBlocks.registerOreDict();
-    }
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent e){
-        //System.out.println("Dartcraft Reloaded Post-Init");
-    }
+		for (int i = 0; i < ModTriggers.TRIGGER_ARRAY.length; i++) {
+			try {
+				method.invoke(null, ModTriggers.TRIGGER_ARRAY[i]);
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+				ex.printStackTrace();
+			}
+		}
+		proxy.registerSmeltingRecipes();
+		DCREventHandler.init();
+		DCRPacketHandler.init();
+		ModBlocks.registerOreDict();
+	}
 
-    @Mod.EventBusSubscriber
-    public static class RegistrationHandler {
-        @SubscribeEvent
-        public static void registerItems(RegistryEvent.Register<Item> event){
-            ModItems.register(event.getRegistry());
-            ModBlocks.registerItemBlocks(event.getRegistry());
-        }
-        @SubscribeEvent
-        public static void registerBlocks(RegistryEvent.Register<Block> event) {
-            ModBlocks.registerNames();
-            ModBlocks.register(event.getRegistry());
-            ModBlocks.registerModels();
-     
-        }
+	@Mod.EventHandler
+	public void postInit(FMLPostInitializationEvent e) {
+		// System.out.println("Dartcraft Reloaded Post-Init");
+	}
 
-        @SideOnly(CLIENT)
-        @SubscribeEvent
-        public static void registerModels(RegistryEvent.Register<Block> event) {
-            ModBlocks.registerModels();
-        }
+	@Mod.EventBusSubscriber
+	public static class RegistrationHandler {
+		@SubscribeEvent
+		public static void registerItems(RegistryEvent.Register<Item> event) {
+			ModItems.register(event.getRegistry());
+			ModBlocks.registerItemBlocks(event.getRegistry());
+		}
 
-        @SubscribeEvent
-        public static void registerModels(ModelRegistryEvent event) {
-            ModItems.registerModels();
-            ModBlocks.registerModels();
-        }
+		@SubscribeEvent
+		public static void registerBlocks(RegistryEvent.Register<Block> event) {
+			ModBlocks.registerNames();
+			ModBlocks.register(event.getRegistry());
+			ModBlocks.registerModels();
 
-        @SubscribeEvent
-        public static void registerPotions(RegistryEvent.Register<Potion> event) {
-            DCRPotionHandler.registerPotions(event.getRegistry());
-        }
-    }
+		}
+
+		@SideOnly(CLIENT)
+		@SubscribeEvent
+		public static void registerModels(RegistryEvent.Register<Block> event) {
+			ModBlocks.registerModels();
+		}
+
+		@SubscribeEvent
+		public static void registerModels(ModelRegistryEvent event) {
+			ModItems.registerModels();
+			ModBlocks.registerModels();
+		}
+
+		@SubscribeEvent
+		public static void registerPotions(RegistryEvent.Register<Potion> event) {
+			DCRPotionHandler.registerPotions(event.getRegistry());
+		}
+	}
 
 }
-

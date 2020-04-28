@@ -8,8 +8,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  */
 public class livingHurtEvent {
 
-    @SubscribeEvent
-    public void livingHurtEvent(LivingHurtEvent event){
+	@SubscribeEvent
+	public void livingHurtEvent(LivingHurtEvent event) {
 
-    }
+	}
 }

@@ -1,162 +1,158 @@
 package burn447.dartcraftReloaded.capablilities.ToolModifier;
 
-
 /**
  * Created by BURN447 on 5/15/2018.
  */
 public interface IToolModifier {
-    /**
-     * Modifier: Speed
-     * Item: Sugar
-     * Levels: 5
-     * Effect: Gives Player Haste [Level] when holding the tool
-     */
-    int getSpeedLevel();
-    boolean hasSpeed();
-    void incrementSpeed();
-    void setSpeed(int newSpeed);
+	/**
+	 * Modifier: Speed Item: Sugar Levels: 5 Effect: Gives Player Haste [Level] when
+	 * holding the tool
+	 */
+	int getSpeedLevel();
 
-    /**
-     * Modifier Heat
-     * Item: Golden Power Source
-     * Levels: 1
-     * Effect: Auto-Smelt Item drops
-     */
-    boolean hasHeat();
-    void setHeat(boolean val);
+	boolean hasSpeed();
 
-    /**
-     * Modifier: Force
-     * Item: Force Nugget
-     * Levels: 3
-     * Effect: Gives the Sword Knockback
-     */
-    int getForceLevel();
-    boolean hasForce();
-    void incrementForce();
-    void setForce(int newForce);
+	void incrementSpeed();
 
-    /**
-     * Modifier Silk
-     * Item: Web
-     * Levels: 1
-     * Effect: Give Pick/Shovel/Axe Silk Touch
-     */
-    boolean hasSilk();
-    void setSilk(boolean val);
+	void setSpeed(int newSpeed);
 
-    /**
-     * Modifier: Sharpness
-     * Item: Claw
-     * Levels: 10
-     * Effect: Adds Sharpness to Force Sword
-     */
-    int getSharpLevel();
-    boolean hasSharp();
-    void incrementSharp();
-    void setSharp(int newSharp);
+	/**
+	 * Modifier Heat Item: Golden Power Source Levels: 1 Effect: Auto-Smelt Item
+	 * drops
+	 */
+	boolean hasHeat();
 
-    /**
-     * Modifier: Luck
-     * Item: Fortune
-     * Levels: 5
-     * Effect: Adds Fortune to a tool or Looting to a sword
-     */
-    int getLuckLevel();
-    boolean hasLuck();
-    void incrementLuck();
-    void setLuck(int newLuck);
+	void setHeat(boolean val);
 
-    /**
-     * Modifier: Sturdy
-     * Item: Bricks/Obsidian
-     * Levels: 10
-     * Effect: Adds 1 Level of Unbreaking to tool up to 10
-     */
-    int getSturdyLevel();
-    boolean hasSturdy();
-    void incrementSturdy();
-    void setSturdy(int newSturdy);
+	/**
+	 * Modifier: Force Item: Force Nugget Levels: 3 Effect: Gives the Sword
+	 * Knockback
+	 */
+	int getForceLevel();
 
-    /**
-     * Modifier: Rainbow
-     * Items: Lapis Lazuli
-     * Levels: 1
-     * Effect: Makes sheep drop a random amount of colored wool
-     */
-    boolean hasRainbow();
-    void setRainbow(boolean val);
+	boolean hasForce();
 
-    /**
-     * Modifier: Lumberjack
-     * Items: Force Log
-     * Levels: 1
-     * Effect: Allows an axe to chop an entire tree down
-     */
-    boolean hasLumberjack();
-    void setLumberjack(boolean val);
+	void incrementForce();
 
-    /**
-     * Modifier: Bleeding
-     * Items: Arrow
-     * Levels: 2
-     * Effect: Applies Bleeding Potion Effect
-     */
+	void setForce(int newForce);
 
-    int getBleedLevel();
-    boolean hasBleed();
-    void incrementBleed();
-    void setBleed(int newBleed);
+	/**
+	 * Modifier Silk Item: Web Levels: 1 Effect: Give Pick/Shovel/Axe Silk Touch
+	 */
+	boolean hasSilk();
 
-    /**
-     * Modifier: Bane
-     * Items: Spider Eye
-     * Levels: 4
-     * Effect: Applies Bane Potion Effect
-     */
+	void setSilk(boolean val);
 
-    int getBaneLevel();
-    boolean hasBane();
-    void incrementBane();
-    void setBane(int newBane);
+	/**
+	 * Modifier: Sharpness Item: Claw Levels: 10 Effect: Adds Sharpness to Force
+	 * Sword
+	 */
+	int getSharpLevel();
 
-    /**
-     * Modifier: Wing
-     * Items: Feathers
-     * Levels: 1
-     * Effect: If full armor set is equipped, player can fly
-     */
+	boolean hasSharp();
 
-    boolean hasWing();
-    void setWing(boolean val);
+	void incrementSharp();
 
-    /**
-     * Modifier: Camo
-     * Items: Invisibility Potion
-     * Levels: 1
-     * Effect: Gives Invisibility to wearer/user
-     */
+	void setSharp(int newSharp);
 
-    boolean hasCamo();
-    void setCamo(boolean val);
+	/**
+	 * Modifier: Luck Item: Fortune Levels: 5 Effect: Adds Fortune to a tool or
+	 * Looting to a sword
+	 */
+	int getLuckLevel();
 
-    /**
-     * Modifier: Sight
-     * Items: Night Vision Potion
-     * Levels: 1
-     * Effect: Gives Night Vision
-     */
+	boolean hasLuck();
 
-    boolean hasSight();
-    void setSight(boolean val);
+	void incrementLuck();
 
-    /**
-     * Modifier: Light
-     * Items: Glowstone Dust
-     * Levels: 1
-     * Effect: Shows mobs through walls
-     */
+	void setLuck(int newLuck);
 
-    boolean hasLight();
-    void setLight(boolean val);
+	/**
+	 * Modifier: Sturdy Item: Bricks/Obsidian Levels: 10 Effect: Adds 1 Level of
+	 * Unbreaking to tool up to 10
+	 */
+	int getSturdyLevel();
+
+	boolean hasSturdy();
+
+	void incrementSturdy();
+
+	void setSturdy(int newSturdy);
+
+	/**
+	 * Modifier: Rainbow Items: Lapis Lazuli Levels: 1 Effect: Makes sheep drop a
+	 * random amount of colored wool
+	 */
+	boolean hasRainbow();
+
+	void setRainbow(boolean val);
+
+	/**
+	 * Modifier: Lumberjack Items: Force Log Levels: 1 Effect: Allows an axe to chop
+	 * an entire tree down
+	 */
+	boolean hasLumberjack();
+
+	void setLumberjack(boolean val);
+
+	/**
+	 * Modifier: Bleeding Items: Arrow Levels: 2 Effect: Applies Bleeding Potion
+	 * Effect
+	 */
+
+	int getBleedLevel();
+
+	boolean hasBleed();
+
+	void incrementBleed();
+
+	void setBleed(int newBleed);
+
+	/**
+	 * Modifier: Bane Items: Spider Eye Levels: 4 Effect: Applies Bane Potion Effect
+	 */
+
+	int getBaneLevel();
+
+	boolean hasBane();
+
+	void incrementBane();
+
+	void setBane(int newBane);
+
+	/**
+	 * Modifier: Wing Items: Feathers Levels: 1 Effect: If full armor set is
+	 * equipped, player can fly
+	 */
+
+	boolean hasWing();
+
+	void setWing(boolean val);
+
+	/**
+	 * Modifier: Camo Items: Invisibility Potion Levels: 1 Effect: Gives
+	 * Invisibility to wearer/user
+	 */
+
+	boolean hasCamo();
+
+	void setCamo(boolean val);
+
+	/**
+	 * Modifier: Sight Items: Night Vision Potion Levels: 1 Effect: Gives Night
+	 * Vision
+	 */
+
+	boolean hasSight();
+
+	void setSight(boolean val);
+
+	/**
+	 * Modifier: Light Items: Glowstone Dust Levels: 1 Effect: Shows mobs through
+	 * walls
+	 */
+
+	boolean hasLight();
+
+	void setLight(boolean val);
 }

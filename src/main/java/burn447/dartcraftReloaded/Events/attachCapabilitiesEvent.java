@@ -18,18 +18,19 @@ import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.*;
  */
 public class attachCapabilitiesEvent {
 
-    @SubscribeEvent
-    public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
-        if(event.getObject() instanceof EntityEnderman && !event.getObject().hasCapability(CAPABILITY_BANE, null)){
-                event.addCapability(BANE_CAP, new BaneProvider(CAPABILITY_BANE, null));
-        }
+	@SubscribeEvent
+	public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
+		if (event.getObject() instanceof EntityEnderman && !event.getObject().hasCapability(CAPABILITY_BANE, null)) {
+			event.addCapability(BANE_CAP, new BaneProvider(CAPABILITY_BANE, null));
+		}
 
-        if(event.getObject() instanceof EntityPlayer && !event.getObject().hasCapability(CAPABILITY_PLAYERMOD, null)){
-            event.addCapability(PLAYER_CAP, new PlayerModifierProvider(CAPABILITY_PLAYERMOD, null));
-        }
+		if (event.getObject() instanceof EntityPlayer && !event.getObject().hasCapability(CAPABILITY_PLAYERMOD, null)) {
+			event.addCapability(PLAYER_CAP, new PlayerModifierProvider(CAPABILITY_PLAYERMOD, null));
+		}
 
-        if(event.getObject() instanceof EntityCow || event.getObject() instanceof EntityChicken && !event.getObject().hasCapability(CAPABILITY_SHEARABLE, null)){
-            event.addCapability(SHEAR_CAP, new ShearableProvider(CAPABILITY_SHEARABLE, null));
-        }
-    }
+		if (event.getObject() instanceof EntityCow || event.getObject() instanceof EntityChicken
+				&& !event.getObject().hasCapability(CAPABILITY_SHEARABLE, null)) {
+			event.addCapability(SHEAR_CAP, new ShearableProvider(CAPABILITY_SHEARABLE, null));
+		}
+	}
 }

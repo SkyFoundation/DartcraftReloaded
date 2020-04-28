@@ -12,58 +12,58 @@ import net.minecraft.util.math.BlockPos;
  */
 public class InfuserMessage extends MessageBase<InfuserMessage> {
 
-    public InfuserMessage(){}
+	public InfuserMessage() {
+	}
 
-    public boolean isButtonPressed = false;
-    public int fluidAmount;
-    private BlockPos pos;
+	public boolean isButtonPressed = false;
+	public int fluidAmount;
+	private BlockPos pos;
 
-    public InfuserMessage(boolean buttonPressed){
-        this.isButtonPressed = buttonPressed;
-    }
+	public InfuserMessage(boolean buttonPressed) {
+		this.isButtonPressed = buttonPressed;
+	}
 
-    public InfuserMessage(int fluidAmount){
-        this.fluidAmount = fluidAmount;
-    }
+	public InfuserMessage(int fluidAmount) {
+		this.fluidAmount = fluidAmount;
+	}
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        isButtonPressed = buf.readBoolean();
-        fluidAmount = buf.readInt();
-    }
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		isButtonPressed = buf.readBoolean();
+		fluidAmount = buf.readInt();
+	}
 
-    @Override
-    public void toBytes(ByteBuf buf) {
-        buf.writeBoolean(isButtonPressed);
-        buf.writeInt(fluidAmount);
-    }
+	@Override
+	public void toBytes(ByteBuf buf) {
+		buf.writeBoolean(isButtonPressed);
+		buf.writeInt(fluidAmount);
+	}
 
-    @Override
-    public void handleClientSide(InfuserMessage message, EntityPlayer player) {
-        Container c = player.openContainer;
-        if(c instanceof ContainerBlockInfuser){
-            ((ContainerBlockInfuser) c).setFluidAmount(fluidAmount);
-        }
+	@Override
+	public void handleClientSide(InfuserMessage message, EntityPlayer player) {
+		Container c = player.openContainer;
+		if (c instanceof ContainerBlockInfuser) {
+			((ContainerBlockInfuser) c).setFluidAmount(fluidAmount);
+		}
 
+	}
 
-    }
+	@Override
+	public void handleServerSide(InfuserMessage message, EntityPlayerMP player) {
+		isButtonPressed = message.isButtonPressed;
 
-    @Override
-    public void handleServerSide(InfuserMessage message, EntityPlayerMP player) {
-        isButtonPressed = message.isButtonPressed;
+		Container c = player.openContainer;
+		if (isButtonPressed) {
+			if (c instanceof ContainerBlockInfuser) {
+				((ContainerBlockInfuser) c).setButtonPressed(message.isButtonPressed);
+			}
+		}
+		if (c instanceof ContainerBlockInfuser) {
+			this.fluidAmount = ((ContainerBlockInfuser) c).getFluidAmount();
+			((ContainerBlockInfuser) c).setFluidAmount(fluidAmount);
 
-        Container c = player.openContainer;
-        if(isButtonPressed){
-            if(c instanceof ContainerBlockInfuser){
-                ((ContainerBlockInfuser) c).setButtonPressed(message.isButtonPressed);
-            }
-        }
-        if(c instanceof ContainerBlockInfuser){
-            this.fluidAmount = ((ContainerBlockInfuser) c).getFluidAmount();
-            ((ContainerBlockInfuser) c).setFluidAmount(fluidAmount);
+		}
 
-        }
-
-    }
+	}
 
 }

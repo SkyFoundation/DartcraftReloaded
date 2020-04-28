@@ -16,42 +16,42 @@ import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.CAPABILITY
  */
 public class PlayerModifierProvider implements ICapabilitySerializable<NBTBase>, ICapabilityProvider {
 
-    private EnumFacing facing = null;
-    private IPlayerModifier instance = null;
+	private EnumFacing facing = null;
+	private IPlayerModifier instance = null;
 
-    public PlayerModifierProvider(Capability<IPlayerModifier> capability, EnumFacing facing){
-        if(capability != null){
-            CAPABILITY_PLAYERMOD = capability;
-            this.facing = facing;
-            this.instance = CAPABILITY_PLAYERMOD.getDefaultInstance();
-        }
-    }
+	public PlayerModifierProvider(Capability<IPlayerModifier> capability, EnumFacing facing) {
+		if (capability != null) {
+			CAPABILITY_PLAYERMOD = capability;
+			this.facing = facing;
+			this.instance = CAPABILITY_PLAYERMOD.getDefaultInstance();
+		}
+	}
 
-    @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        if(capability == CAPABILITY_PLAYERMOD)
-            return capability == getCapability();
-        else
-            return false;
-    }
+	@Override
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		if (capability == CAPABILITY_PLAYERMOD)
+			return capability == getCapability();
+		else
+			return false;
+	}
 
-    @Nullable
-    @Override
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == CAPABILITY_PLAYERMOD ? CAPABILITY_PLAYERMOD.<T> cast(instance) : null;
-    }
+	@Nullable
+	@Override
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		return capability == CAPABILITY_PLAYERMOD ? CAPABILITY_PLAYERMOD.<T>cast(instance) : null;
+	}
 
-    @Override
-    public NBTBase serializeNBT() {
-        return CAPABILITY_PLAYERMOD.getStorage().writeNBT(CAPABILITY_PLAYERMOD, instance, null);
-    }
+	@Override
+	public NBTBase serializeNBT() {
+		return CAPABILITY_PLAYERMOD.getStorage().writeNBT(CAPABILITY_PLAYERMOD, instance, null);
+	}
 
-    @Override
-    public void deserializeNBT(NBTBase nbt) {
-        CAPABILITY_PLAYERMOD.getStorage().readNBT(CAPABILITY_PLAYERMOD, instance, null, nbt);
-    }
+	@Override
+	public void deserializeNBT(NBTBase nbt) {
+		CAPABILITY_PLAYERMOD.getStorage().readNBT(CAPABILITY_PLAYERMOD, instance, null, nbt);
+	}
 
-    public final Capability<IPlayerModifier> getCapability(){
-        return CAPABILITY_PLAYERMOD;
-    }
+	public final Capability<IPlayerModifier> getCapability() {
+		return CAPABILITY_PLAYERMOD;
+	}
 }

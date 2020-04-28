@@ -35,145 +35,146 @@ import static burn447.dartcraftReloaded.util.DartUtils.isLog;
  */
 public class ItemForceAxe extends ItemAxe {
 
-    private static String name;
+	private static String name;
 
-    public List<References.MODIFIERS> applicableModifers = new ArrayList<>();
+	public List<References.MODIFIERS> applicableModifers = new ArrayList<>();
 
-    public ItemForceAxe(String name) {
-        super(dartcraftReloaded.forceToolMaterial, 8.0F, 8.0F);
-        this.setRegistryName(name);
-        this.setTranslationKey(name);
-        this.setCreativeTab(dartcraftReloaded.creativeTab);
-        this.name = name;
-        this.attackSpeed = -2.0F;
-        this.attackDamage = 8.0F;
-    }
+	public ItemForceAxe(String name) {
+		super(dartcraftReloaded.forceToolMaterial, 8.0F, 8.0F);
+		this.setRegistryName(name);
+		this.setTranslationKey(name);
+		this.setCreativeTab(dartcraftReloaded.creativeTab);
+		this.name = name;
+		this.attackSpeed = -2.0F;
+		this.attackDamage = 8.0F;
+	}
 
-    public void registerItemModel() {
-        dartcraftReloaded.proxy.registerItemRenderer(this, 0, name);
-    }
+	public void registerItemModel() {
+		dartcraftReloaded.proxy.registerItemRenderer(this, 0, name);
+	}
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        if(!stack.hasCapability(CAPABILITY_TOOLMOD, null))
-            return new ToolModProvider(CAPABILITY_TOOLMOD, null);
-        else
-            return null;
-    }
+	@Nullable
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		if (!stack.hasCapability(CAPABILITY_TOOLMOD, null))
+			return new ToolModProvider(CAPABILITY_TOOLMOD, null);
+		else
+			return null;
+	}
 
-    @Override
-    public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
-        if (stack.getCapability(CAPABILITY_TOOLMOD, null).hasLumberjack()) {
-            if (player != null) {
-                if (DartUtils.isTree(player.getEntityWorld(), pos)) {
-                    return fellTree(stack, pos, player);
-                }
-            }
-        }
-        return false;
-    }
+	@Override
+	public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
+		if (stack.getCapability(CAPABILITY_TOOLMOD, null).hasLumberjack()) {
+			if (player != null) {
+				if (DartUtils.isTree(player.getEntityWorld(), pos)) {
+					return fellTree(stack, pos, player);
+				}
+			}
+		}
+		return false;
+	}
 
-    public static boolean fellTree(ItemStack stack, BlockPos pos, EntityPlayer player){
-        if(player.getEntityWorld().isRemote)
-            return true;
+	public static boolean fellTree(ItemStack stack, BlockPos pos, EntityPlayer player) {
+		if (player.getEntityWorld().isRemote)
+			return true;
 
-        MinecraftForge.EVENT_BUS.register(new TreeChopTask(stack, pos, player, 10));
-        return true;
-    }
+		MinecraftForge.EVENT_BUS.register(new TreeChopTask(stack, pos, player, 10));
+		return true;
+	}
 
-    public static class TreeChopTask{
-        public final World world;
-        public final EntityPlayer player;
-        public final ItemStack tool;
-        public final int blocksPerTick;
+	public static class TreeChopTask {
+		public final World world;
+		public final EntityPlayer player;
+		public final ItemStack tool;
+		public final int blocksPerTick;
 
-        public Queue<BlockPos> blocks = Lists.newLinkedList();
-        public Set<BlockPos> visited = new THashSet<>();
+		public Queue<BlockPos> blocks = Lists.newLinkedList();
+		public Set<BlockPos> visited = new THashSet<>();
 
-        public TreeChopTask(ItemStack tool, BlockPos start, EntityPlayer player, int blocksPerTick) {
-            this.world = player.getEntityWorld();
-            this.player = player;
-            this.tool = tool;
-            this.blocksPerTick = blocksPerTick;
+		public TreeChopTask(ItemStack tool, BlockPos start, EntityPlayer player, int blocksPerTick) {
+			this.world = player.getEntityWorld();
+			this.player = player;
+			this.tool = tool;
+			this.blocksPerTick = blocksPerTick;
 
-            this.blocks.add(start);
-        }
+			this.blocks.add(start);
+		}
 
-        @SubscribeEvent
-        public void chop(TickEvent.WorldTickEvent event) {
-            if(event.side.isClient()) {
-                finish();
-                return;
-            }
-            // only if same dimension
-            if(event.world.provider.getDimension() != world.provider.getDimension()) {
-                return;
-            }
+		@SubscribeEvent
+		public void chop(TickEvent.WorldTickEvent event) {
+			if (event.side.isClient()) {
+				finish();
+				return;
+			}
+			// only if same dimension
+			if (event.world.provider.getDimension() != world.provider.getDimension()) {
+				return;
+			}
 
-            // setup
-            int left = blocksPerTick;
+			// setup
+			int left = blocksPerTick;
 
-            // continue running
-            BlockPos pos;
-            while(left > 0) {
-                // completely done or can't do our job anymore?!
-                if(blocks.isEmpty()) {
-                    finish();
-                    return;
-                }
+			// continue running
+			BlockPos pos;
+			while (left > 0) {
+				// completely done or can't do our job anymore?!
+				if (blocks.isEmpty()) {
+					finish();
+					return;
+				}
 
-                pos = blocks.remove();
-                if(!visited.add(pos)) {
-                    continue;
-                }
+				pos = blocks.remove();
+				if (!visited.add(pos)) {
+					continue;
+				}
 
-                // can we harvest the block and is effective?
-                if(!isLog(world, pos)) {
-                    continue;
-                }
+				// can we harvest the block and is effective?
+				if (!isLog(world, pos)) {
+					continue;
+				}
 
-                // save its neighbours
-                for(EnumFacing facing : new EnumFacing[] { EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST }) {
-                    BlockPos pos2 = pos.offset(facing);
-                    if(!visited.contains(pos2)) {
-                        blocks.add(pos2);
-                    }
-                }
+				// save its neighbours
+				for (EnumFacing facing : new EnumFacing[] { EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH,
+						EnumFacing.WEST }) {
+					BlockPos pos2 = pos.offset(facing);
+					if (!visited.contains(pos2)) {
+						blocks.add(pos2);
+					}
+				}
 
-                // also add the layer above.. stupid acacia trees
-                for(int x = 0; x < 3; x++) {
-                    for(int z = 0; z < 3; z++) {
-                        BlockPos pos2 = pos.add(-1 + x, 1, -1 + z);
-                        if(!visited.contains(pos2)) {
-                            blocks.add(pos2);
-                        }
-                    }
-                }
+				// also add the layer above.. stupid acacia trees
+				for (int x = 0; x < 3; x++) {
+					for (int z = 0; z < 3; z++) {
+						BlockPos pos2 = pos.add(-1 + x, 1, -1 + z);
+						if (!visited.contains(pos2)) {
+							blocks.add(pos2);
+						}
+					}
+				}
 
-                // break it, wooo!
-                DartUtils.breakExtraBlock(tool, world, player, pos, pos);
-                left--;
-            }
-        }
+				// break it, wooo!
+				DartUtils.breakExtraBlock(tool, world, player, pos, pos);
+				left--;
+			}
+		}
 
-        private void finish() {
-            // goodbye cruel world
-            MinecraftForge.EVENT_BUS.unregister(this);
-        }
-    }
+		private void finish() {
+			// goodbye cruel world
+			MinecraftForge.EVENT_BUS.unregister(this);
+		}
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List lores, ITooltipFlag flagIn) {
-        attatchInformation(stack, lores);
-        super.addInformation(stack, worldIn, lores, flagIn);
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List lores, ITooltipFlag flagIn) {
+		attatchInformation(stack, lores);
+		super.addInformation(stack, worldIn, lores, flagIn);
+	}
 
-    static void attatchInformation(ItemStack stack, List toolTip) {
-        if (stack.getCapability(CAPABILITY_TOOLMOD, null) != null) {
-            if(stack.getCapability(CAPABILITY_TOOLMOD, null).getSpeedLevel() > 0)
-                toolTip.add("Speed " + stack.getCapability(CAPABILITY_TOOLMOD, null).getSpeedLevel());
-        }
-    }
+	static void attatchInformation(ItemStack stack, List toolTip) {
+		if (stack.getCapability(CAPABILITY_TOOLMOD, null) != null) {
+			if (stack.getCapability(CAPABILITY_TOOLMOD, null).getSpeedLevel() > 0)
+				toolTip.add("Speed " + stack.getCapability(CAPABILITY_TOOLMOD, null).getSpeedLevel());
+		}
+	}
 }

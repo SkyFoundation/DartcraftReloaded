@@ -10,12 +10,12 @@ import net.minecraft.util.DamageSource;
  */
 public class EffectBleeding extends PotionEffect {
 
-    public EffectBleeding(int duration) {
-        super(DCRPotionHandler.potionBleeding, duration, 0, false, true);
-    }
+	public EffectBleeding(int duration) {
+		super(DCRPotionHandler.potionBleeding, duration, 0, false, true);
+	}
 
-    @Override
-    public void performEffect(EntityLivingBase entityIn) {
-        entityIn.attackEntityFrom(DamageSource.GENERIC, 1);
-    }
+	@Override
+	public void performEffect(EntityLivingBase entityIn) {
+		entityIn.attackEntityFrom(DamageSource.GENERIC, 1);
+	}
 }

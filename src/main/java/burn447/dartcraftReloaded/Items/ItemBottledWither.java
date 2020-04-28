@@ -10,19 +10,19 @@ import net.minecraft.world.World;
 
 public class ItemBottledWither extends ItemBase {
 
+	public ItemBottledWither(String name) {
+		super(name);
+	}
 
-    public ItemBottledWither(String name) {
-        super(name);
-    }
-
-    @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
-            EntityWither wither = new EntityWither(worldIn);
-            wither.setLocationAndAngles(pos.getX(), pos.getY() + 2.0, pos.getZ(), 0.0F, 0.0F);
-            worldIn.spawnEntity(wither);
-        }
-        player.getHeldItem(hand).shrink(1);
-        return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
-    }
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
+			EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (!worldIn.isRemote) {
+			EntityWither wither = new EntityWither(worldIn);
+			wither.setLocationAndAngles(pos.getX(), pos.getY() + 2.0, pos.getZ(), 0.0F, 0.0F);
+			worldIn.spawnEntity(wither);
+		}
+		player.getHeldItem(hand).shrink(1);
+		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+	}
 }

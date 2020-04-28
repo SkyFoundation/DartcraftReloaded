@@ -11,16 +11,16 @@ import net.minecraftforge.registries.IForgeRegistry;
  */
 public class DCRPotionHandler {
 
-    public static Potion potionBleeding;
-    public static Potion potionMagnet;
+	public static Potion potionBleeding;
+	public static Potion potionMagnet;
 
-    public static void preInit(FMLPreInitializationEvent event){
-        potionBleeding = new PotionBleeding();
-        potionMagnet = new PotionMagnet();
-    }
+	public static void preInit(FMLPreInitializationEvent event) {
+		potionBleeding = new PotionBleeding();
+		potionMagnet = new PotionMagnet();
+	}
 
-    public static void registerPotions(IForgeRegistry<Potion> registry){
-        registry.register(potionBleeding);
-        registry.register(potionMagnet);
-    }
+	public static void registerPotions(IForgeRegistry<Potion> registry) {
+		registry.register(potionBleeding);
+		registry.register(potionMagnet);
+	}
 }

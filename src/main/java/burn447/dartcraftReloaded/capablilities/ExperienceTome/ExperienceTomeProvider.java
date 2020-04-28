@@ -16,42 +16,42 @@ import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.CAPABILITY
  */
 public class ExperienceTomeProvider implements ICapabilitySerializable<NBTBase>, ICapabilityProvider {
 
-    private EnumFacing facing = null;
-    private IExperienceTome instacne = null;
+	private EnumFacing facing = null;
+	private IExperienceTome instacne = null;
 
-    public ExperienceTomeProvider(Capability<IExperienceTome> capability, EnumFacing facing){
-        if(capability != null){
-            CAPABILITY_EXPTOME = capability;
-            this.facing = facing;
-            this.instacne = CAPABILITY_EXPTOME.getDefaultInstance();
-        }
-    }
+	public ExperienceTomeProvider(Capability<IExperienceTome> capability, EnumFacing facing) {
+		if (capability != null) {
+			CAPABILITY_EXPTOME = capability;
+			this.facing = facing;
+			this.instacne = CAPABILITY_EXPTOME.getDefaultInstance();
+		}
+	}
 
-    @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        if(capability == CAPABILITY_EXPTOME)
-            return capability == getCapability();
-        else
-            return false;
-    }
+	@Override
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		if (capability == CAPABILITY_EXPTOME)
+			return capability == getCapability();
+		else
+			return false;
+	}
 
-    @Nullable
-    @Override
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == CAPABILITY_EXPTOME ? CAPABILITY_EXPTOME.<T> cast(instacne) : null;
-    }
+	@Nullable
+	@Override
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		return capability == CAPABILITY_EXPTOME ? CAPABILITY_EXPTOME.<T>cast(instacne) : null;
+	}
 
-    @Override
-    public NBTBase serializeNBT() {
-        return CAPABILITY_EXPTOME.getStorage().writeNBT(CAPABILITY_EXPTOME, instacne, null);
-    }
+	@Override
+	public NBTBase serializeNBT() {
+		return CAPABILITY_EXPTOME.getStorage().writeNBT(CAPABILITY_EXPTOME, instacne, null);
+	}
 
-    @Override
-    public void deserializeNBT(NBTBase nbt) {
-        CAPABILITY_EXPTOME.getStorage().readNBT(CAPABILITY_EXPTOME, instacne, null, nbt);
-    }
+	@Override
+	public void deserializeNBT(NBTBase nbt) {
+		CAPABILITY_EXPTOME.getStorage().readNBT(CAPABILITY_EXPTOME, instacne, null, nbt);
+	}
 
-    public final Capability<IExperienceTome> getCapability(){
-        return CAPABILITY_EXPTOME;
-    }
+	public final Capability<IExperienceTome> getCapability() {
+		return CAPABILITY_EXPTOME;
+	}
 }

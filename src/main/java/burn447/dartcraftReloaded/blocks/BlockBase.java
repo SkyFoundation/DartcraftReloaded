@@ -18,65 +18,65 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 public class BlockBase extends Block {
 
-    protected String name;
-    protected String oreName;
+	protected String name;
+	protected String oreName;
 
-    public BlockBase(Material material, String name, String oreName) {
-        super(material);
-        this.name = name;
-        this.oreName = oreName;
-        this.setHardness(2.0F);
-    }
+	public BlockBase(Material material, String name, String oreName) {
+		super(material);
+		this.name = name;
+		this.oreName = oreName;
+		this.setHardness(2.0F);
+	}
 
-    public BlockBase(Material material, String name, String oreName, SoundType sound) {
-        super(material);
-        this.name = name;
-        this.oreName = oreName;
-        this.setSoundType(sound);
-        this.setHardness(2.0F);
-    }
+	public BlockBase(Material material, String name, String oreName, SoundType sound) {
+		super(material);
+		this.name = name;
+		this.oreName = oreName;
+		this.setSoundType(sound);
+		this.setHardness(2.0F);
+	}
 
-    public BlockBase(Material material, String name) {
-        super(material);
-        this.name = name;
-        this.oreName = name;
-        this.setHardness(2.0F);
-    }
+	public BlockBase(Material material, String name) {
+		super(material);
+		this.name = name;
+		this.oreName = name;
+		this.setHardness(2.0F);
+	}
 
-    public void registerItemModel(Item itemBlock) {
-        dartcraftReloaded.proxy.registerItemRenderer(itemBlock, 0, name);
-    }
+	public void registerItemModel(Item itemBlock) {
+		dartcraftReloaded.proxy.registerItemRenderer(itemBlock, 0, name);
+	}
 
-    public Item createItemBlock() {
-        return new ItemBlock(this).setRegistryName(getRegistryName());
-    }
+	public Item createItemBlock() {
+		return new ItemBlock(this).setRegistryName(getRegistryName());
+	}
 
-    @Override
-    public BlockBase setCreativeTab(CreativeTabs tab) {
-        super.setCreativeTab(tab);
-        return this;
-    }
+	@Override
+	public BlockBase setCreativeTab(CreativeTabs tab) {
+		super.setCreativeTab(tab);
+		return this;
+	}
 
-    @Override
-    public BlockStateContainer getBlockState() {
-        return super.getBlockState();
-    }
+	@Override
+	public BlockStateContainer getBlockState() {
+		return super.getBlockState();
+	}
 
-    public void initOreDict() {
-        OreDictionary.registerOre(oreName, this);
-    }
+	public void initOreDict() {
+		OreDictionary.registerOre(oreName, this);
+	}
 
-    @Override
-    public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
-        if(this.name == "forcePlanks") {
-            return 30;
-        }
-        return super.getFlammability(world, pos, face);
-    }
+	@Override
+	public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
+		if (this.name == "forcePlanks") {
+			return 30;
+		}
+		return super.getFlammability(world, pos, face);
+	}
 
-    @Override
-    public boolean isFlammable(IBlockAccess world, BlockPos pos, EnumFacing face) {
-        return true;
-    }
+	@Override
+	public boolean isFlammable(IBlockAccess world, BlockPos pos, EnumFacing face) {
+		return true;
+	}
 
 }

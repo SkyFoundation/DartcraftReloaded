@@ -9,11 +9,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  */
 public class livingDeathEvent {
 
-    @SubscribeEvent
-    public void livingDeathEvent(LivingDeathEvent event) {
-        if(event.getSource().getTrueSource() instanceof EntityPlayer) {
-            
-        }
+	@SubscribeEvent
+	public void livingDeathEvent(LivingDeathEvent event) {
+		if (event.getSource().getTrueSource() instanceof EntityPlayer) {
 
-    }
+		}
+
+	}
 }

@@ -8,15 +8,21 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public interface IForceWrench {
 
-    boolean hasBlockStored();
-    boolean canStoreBlock();
-    NBTTagCompound getStoredBlockNBT();
-    IBlockState getStoredBlockState();
-    String getStoredName();
+	boolean hasBlockStored();
 
-    void storeBlockNBT(NBTTagCompound nbt);
-    void storeBlockState(IBlockState base);
-    void setBlockName(String name);
+	boolean canStoreBlock();
 
-    void clearBlockStorage();
+	NBTTagCompound getStoredBlockNBT();
+
+	IBlockState getStoredBlockState();
+
+	String getStoredName();
+
+	void storeBlockNBT(NBTTagCompound nbt);
+
+	void storeBlockState(IBlockState base);
+
+	void setBlockName(String name);
+
+	void clearBlockStorage();
 }

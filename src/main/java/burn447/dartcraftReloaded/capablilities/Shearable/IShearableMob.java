@@ -8,10 +8,15 @@ import net.minecraftforge.common.util.INBTSerializable;
  */
 public interface IShearableMob extends INBTSerializable<NBTTagCompound> {
 
-    boolean canBeSheared();
-    void update();
-    int getTimer();
-    void setTimer(int newTimer);
-    void setShearable(boolean newVal);
-    void setSheared(boolean wasSheared);
+	boolean canBeSheared();
+
+	void update();
+
+	int getTimer();
+
+	void setTimer(int newTimer);
+
+	void setShearable(boolean newVal);
+
+	void setSheared(boolean wasSheared);
 }

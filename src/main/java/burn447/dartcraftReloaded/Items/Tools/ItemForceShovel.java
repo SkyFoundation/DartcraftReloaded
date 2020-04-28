@@ -37,95 +37,92 @@ import static burn447.dartcraftReloaded.util.References.MODIFIERS.*;
  */
 public class ItemForceShovel extends ItemSpade {
 
-    private static String name;
+	private static String name;
 
-    private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND, Blocks.GRASS, Blocks.GRAVEL, Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW, Blocks.SNOW_LAYER, Blocks.SOUL_SAND, Blocks.GRASS_PATH, Blocks.CONCRETE_POWDER);
+	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(Blocks.CLAY, Blocks.DIRT, Blocks.FARMLAND,
+			Blocks.GRASS, Blocks.GRAVEL, Blocks.MYCELIUM, Blocks.SAND, Blocks.SNOW, Blocks.SNOW_LAYER, Blocks.SOUL_SAND,
+			Blocks.GRASS_PATH, Blocks.CONCRETE_POWDER);
 
-    public List<References.MODIFIERS> applicableModifers = new ArrayList<>();
+	public List<References.MODIFIERS> applicableModifers = new ArrayList<>();
 
-    public ItemForceShovel(String name) {
-        super(dartcraftReloaded.forceToolMaterial);
-        setApplicableModifers();
-        this.setRegistryName(name);
-        this.setTranslationKey(name);
-        this.setCreativeTab(dartcraftReloaded.creativeTab);
-        this.name = name;
-        this.attackDamage = 2.5F;
+	public ItemForceShovel(String name) {
+		super(dartcraftReloaded.forceToolMaterial);
+		setApplicableModifers();
+		this.setRegistryName(name);
+		this.setTranslationKey(name);
+		this.setCreativeTab(dartcraftReloaded.creativeTab);
+		this.name = name;
+		this.attackDamage = 2.5F;
 
-    }
+	}
 
-    public void registerItemModel() {
-        dartcraftReloaded.proxy.registerItemRenderer(this, 0, name);
-    }
+	public void registerItemModel() {
+		dartcraftReloaded.proxy.registerItemRenderer(this, 0, name);
+	}
 
-    public void setApplicableModifers() {
-        applicableModifers.add(MOD_CHARGE);
-        applicableModifers.add(MOD_CHARGEII);
-        applicableModifers.add(MOD_HEAT);
-        applicableModifers.add(MOD_LUCK);
-        applicableModifers.add(MOD_GRINDING);
-        applicableModifers.add(MOD_TOUCH);
-        applicableModifers.add(MOD_STURDY);
-        applicableModifers.add(MOD_REPAIR);
-        applicableModifers.add(MOD_SPEED);
-    }
+	public void setApplicableModifers() {
+		applicableModifers.add(MOD_CHARGE);
+		applicableModifers.add(MOD_CHARGEII);
+		applicableModifers.add(MOD_HEAT);
+		applicableModifers.add(MOD_LUCK);
+		applicableModifers.add(MOD_GRINDING);
+		applicableModifers.add(MOD_TOUCH);
+		applicableModifers.add(MOD_STURDY);
+		applicableModifers.add(MOD_REPAIR);
+		applicableModifers.add(MOD_SPEED);
+	}
 
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        ItemStack itemstack = player.getHeldItem(hand);
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
+			EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack itemstack = player.getHeldItem(hand);
 
-        if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack))
-        {
-            return EnumActionResult.FAIL;
-        }
-        else
-        {
-            IBlockState iblockstate = worldIn.getBlockState(pos);
-            Block block = iblockstate.getBlock();
+		if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack)) {
+			return EnumActionResult.FAIL;
+		} else {
+			IBlockState iblockstate = worldIn.getBlockState(pos);
+			Block block = iblockstate.getBlock();
 
-            if (facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR && block == Blocks.GRASS)
-            {
-                IBlockState iblockstate1 = Blocks.GRASS_PATH.getDefaultState();
-                worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			if (facing != EnumFacing.DOWN && worldIn.getBlockState(pos.up()).getMaterial() == Material.AIR
+					&& block == Blocks.GRASS) {
+				IBlockState iblockstate1 = Blocks.GRASS_PATH.getDefaultState();
+				worldIn.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
-                if (!worldIn.isRemote)
-                {
-                    worldIn.setBlockState(pos, iblockstate1, 11);
-                    itemstack.damageItem(1, player);
-                }
+				if (!worldIn.isRemote) {
+					worldIn.setBlockState(pos, iblockstate1, 11);
+					itemstack.damageItem(1, player);
+				}
 
-                return EnumActionResult.SUCCESS;
-            }
-            else
-            {
-                return EnumActionResult.PASS;
-            }
-        }
-    }
+				return EnumActionResult.SUCCESS;
+			} else {
+				return EnumActionResult.PASS;
+			}
+		}
+	}
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        if(!stack.hasCapability(CAPABILITY_TOOLMOD, null))
-            return new ToolModProvider(CAPABILITY_TOOLMOD, null);
-        else
-            return null;
-    }
+	@Nullable
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		if (!stack.hasCapability(CAPABILITY_TOOLMOD, null))
+			return new ToolModProvider(CAPABILITY_TOOLMOD, null);
+		else
+			return null;
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List lores, ITooltipFlag flagIn) {
-        ItemForceAxe.attatchInformation(stack, lores);
-        super.addInformation(stack, worldIn, lores, flagIn);
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List lores, ITooltipFlag flagIn) {
+		ItemForceAxe.attatchInformation(stack, lores);
+		super.addInformation(stack, worldIn, lores, flagIn);
+	}
 
-    @Override
-    public int getItemEnchantability() {
-        return 0;
-    }
+	@Override
+	public int getItemEnchantability() {
+		return 0;
+	}
 
-    @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        return false;
-    }
+	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+		return false;
+	}
 
 }

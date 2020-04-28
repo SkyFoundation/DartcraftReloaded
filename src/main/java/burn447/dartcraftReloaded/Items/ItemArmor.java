@@ -19,36 +19,36 @@ import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.CAPABILITY
  */
 public class ItemArmor extends net.minecraft.item.ItemArmor {
 
-    private String name;
+	private String name;
 
-    public ItemArmor(ArmorMaterial material, EntityEquipmentSlot slot, String name) {
-        super(material, 0, slot);
-        setRegistryName(name);
-        setTranslationKey(name);
-        this.name = name;
-        setCreativeTab(dartcraftReloaded.creativeTab);
-    }
+	public ItemArmor(ArmorMaterial material, EntityEquipmentSlot slot, String name) {
+		super(material, 0, slot);
+		setRegistryName(name);
+		setTranslationKey(name);
+		this.name = name;
+		setCreativeTab(dartcraftReloaded.creativeTab);
+	}
 
-    public void registerItemModel() {
-        dartcraftReloaded.proxy.registerItemRenderer(this, 0, name);
-    }
+	public void registerItemModel() {
+		dartcraftReloaded.proxy.registerItemRenderer(this, 0, name);
+	}
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        if(!stack.hasCapability(CAPABILITY_TOOLMOD, null))
-            return new ToolModProvider(CAPABILITY_TOOLMOD, null);
-        else
-            return null;
-    }
+	@Nullable
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		if (!stack.hasCapability(CAPABILITY_TOOLMOD, null))
+			return new ToolModProvider(CAPABILITY_TOOLMOD, null);
+		else
+			return null;
+	}
 
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 
-    }
+	}
 
-    @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        return false;
-    }
+	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+		return false;
+	}
 }

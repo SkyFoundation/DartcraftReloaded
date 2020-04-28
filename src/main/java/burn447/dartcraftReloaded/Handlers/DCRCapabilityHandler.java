@@ -33,44 +33,46 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public class DCRCapabilityHandler {
 
-    public static final ResourceLocation BANE_CAP = new ResourceLocation(References.modId, "baneMod");
-    public static final ResourceLocation PLAYER_CAP = new ResourceLocation(References.modId, "playerMod");
-    public static final ResourceLocation SHEAR_CAP = new ResourceLocation(References.modId, "shearable");
+	public static final ResourceLocation BANE_CAP = new ResourceLocation(References.modId, "baneMod");
+	public static final ResourceLocation PLAYER_CAP = new ResourceLocation(References.modId, "playerMod");
+	public static final ResourceLocation SHEAR_CAP = new ResourceLocation(References.modId, "shearable");
 
-    @CapabilityInject(IToolModifier.class)
-    public static Capability<IToolModifier> CAPABILITY_TOOLMOD = null;
+	@CapabilityInject(IToolModifier.class)
+	public static Capability<IToolModifier> CAPABILITY_TOOLMOD = null;
 
-    @CapabilityInject(IForceRodModifier.class)
-    public static Capability<IForceRodModifier> CAPABILITY_FORCEROD = null;
+	@CapabilityInject(IForceRodModifier.class)
+	public static Capability<IForceRodModifier> CAPABILITY_FORCEROD = null;
 
-    @CapabilityInject(IExperienceTome.class)
-    public static Capability<IExperienceTome> CAPABILITY_EXPTOME = null;
+	@CapabilityInject(IExperienceTome.class)
+	public static Capability<IExperienceTome> CAPABILITY_EXPTOME = null;
 
-    @CapabilityInject(IBaneModifier.class)
-    public static Capability<IBaneModifier> CAPABILITY_BANE = null;
+	@CapabilityInject(IBaneModifier.class)
+	public static Capability<IBaneModifier> CAPABILITY_BANE = null;
 
-    @CapabilityInject(IPlayerModifier.class)
-    public static Capability<IPlayerModifier> CAPABILITY_PLAYERMOD = null;
+	@CapabilityInject(IPlayerModifier.class)
+	public static Capability<IPlayerModifier> CAPABILITY_PLAYERMOD = null;
 
-    @CapabilityInject(IShearableMob.class)
-    public static Capability<IShearableMob> CAPABILITY_SHEARABLE = null;
+	@CapabilityInject(IShearableMob.class)
+	public static Capability<IShearableMob> CAPABILITY_SHEARABLE = null;
 
-    @CapabilityInject(IForceWrench.class)
-    public static Capability<IForceWrench> CAPABILITY_FORCEWRENCH = null;
+	@CapabilityInject(IForceWrench.class)
+	public static Capability<IForceWrench> CAPABILITY_FORCEWRENCH = null;
 
-    @CapabilityInject(IMagnet.class)
-    public static Capability<IMagnet> CAPABILITY_MAGNET = null;
+	@CapabilityInject(IMagnet.class)
+	public static Capability<IMagnet> CAPABILITY_MAGNET = null;
 
-    public static void register(){
-        CapabilityManager.INSTANCE.register(IToolModifier.class, new ToolModStorage(), new ToolFactory());
-        CapabilityManager.INSTANCE.register(IForceRodModifier.class, new ForceRodStorage(), new ForceRodFactory());
-        CapabilityManager.INSTANCE.register(IExperienceTome.class, new ExperienceTomeStorage(), new ExperienceTomeFactory());
-        CapabilityManager.INSTANCE.register(IBaneModifier.class, new BaneModifierStorage(), new BaneFactory());
-        CapabilityManager.INSTANCE.register(IShearableMob.class, new ShearableStorage(), new ShearableFactory());
-        CapabilityManager.INSTANCE.register(IForceWrench.class, new ForceWrenchStorage(), new ForceWrenchFactory());
-        CapabilityManager.INSTANCE.register(IPlayerModifier.class, new PlayerModifierStorage(), new PlayerModifierFactory());
-        CapabilityManager.INSTANCE.register(IMagnet.class, new MagnetStorage(), new MagnetFactory());
+	public static void register() {
+		CapabilityManager.INSTANCE.register(IToolModifier.class, new ToolModStorage(), new ToolFactory());
+		CapabilityManager.INSTANCE.register(IForceRodModifier.class, new ForceRodStorage(), new ForceRodFactory());
+		CapabilityManager.INSTANCE.register(IExperienceTome.class, new ExperienceTomeStorage(),
+				new ExperienceTomeFactory());
+		CapabilityManager.INSTANCE.register(IBaneModifier.class, new BaneModifierStorage(), new BaneFactory());
+		CapabilityManager.INSTANCE.register(IShearableMob.class, new ShearableStorage(), new ShearableFactory());
+		CapabilityManager.INSTANCE.register(IForceWrench.class, new ForceWrenchStorage(), new ForceWrenchFactory());
+		CapabilityManager.INSTANCE.register(IPlayerModifier.class, new PlayerModifierStorage(),
+				new PlayerModifierFactory());
+		CapabilityManager.INSTANCE.register(IMagnet.class, new MagnetStorage(), new MagnetFactory());
 
-        MinecraftForge.EVENT_BUS.register(new DCRCapabilityHandler());
-    }
+		MinecraftForge.EVENT_BUS.register(new DCRCapabilityHandler());
+	}
 }

@@ -20,40 +20,39 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
  */
 public class DCRGUIHandler implements IGuiHandler {
 
-    public static final int INFUSER = 0;
-    public static final int FURNACE = 1;
-    public static final int PACK = 2;
-    public static final int BELT = 3;
+	public static final int INFUSER = 0;
+	public static final int FURNACE = 1;
+	public static final int PACK = 2;
+	public static final int BELT = 3;
 
+	@Override
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		if (ID == INFUSER) {
+			return new GUIInfuser(player.inventory, (TileEntityInfuser) world.getTileEntity(new BlockPos(x, y, z)));
+		} else if (ID == FURNACE) {
+			return new GUIFurnace(player.inventory,
+					(TileEntityForceFurnace) world.getTileEntity(new BlockPos(x, y, z)));
+		} else if (ID == PACK) {
+			return new GUIForcePack(player.inventory, player.getHeldItemMainhand());
+		} else if (ID == BELT) {
+			return new GUIForceBelt(player.inventory, player.getHeldItemMainhand());
+		}
+		return null;
+	}
 
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        if(ID == INFUSER){
-            return new GUIInfuser(player.inventory, (TileEntityInfuser)world.getTileEntity(new BlockPos(x, y, z)));
-        }
-        else if(ID == FURNACE) {
-            return new GUIFurnace(player.inventory, (TileEntityForceFurnace)world.getTileEntity(new BlockPos(x, y, z)));
-        }
-        else if (ID == PACK) {
-            return new GUIForcePack(player.inventory, player.getHeldItemMainhand());
-        }
-        else if(ID == BELT) {
-            return new GUIForceBelt(player.inventory, player.getHeldItemMainhand());
-        }
-        return null;
-    }
-
-    @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        if (ID == INFUSER) {
-            return new ContainerBlockInfuser(player.inventory, (TileEntityInfuser) world.getTileEntity(new BlockPos(x, y, z)));
-        } else if (ID == FURNACE) {
-            return new ContainerBlockFurnace(player.inventory, (TileEntityForceFurnace) world.getTileEntity(new BlockPos(x, y, z)));
-        } else if (ID == PACK) {
-            return new ContainerItemForcePack(player.inventory, player.getHeldItemMainhand());
-        } else if (ID == BELT) {
-            return new ContainerItemForceBelt(player.inventory, player.getHeldItemMainhand());
-        }
-        return null;
-    }
+	@Override
+	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		if (ID == INFUSER) {
+			return new ContainerBlockInfuser(player.inventory,
+					(TileEntityInfuser) world.getTileEntity(new BlockPos(x, y, z)));
+		} else if (ID == FURNACE) {
+			return new ContainerBlockFurnace(player.inventory,
+					(TileEntityForceFurnace) world.getTileEntity(new BlockPos(x, y, z)));
+		} else if (ID == PACK) {
+			return new ContainerItemForcePack(player.inventory, player.getHeldItemMainhand());
+		} else if (ID == BELT) {
+			return new ContainerItemForceBelt(player.inventory, player.getHeldItemMainhand());
+		}
+		return null;
+	}
 }

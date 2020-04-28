@@ -8,23 +8,24 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
  */
 public class ServerHelper {
 
-    private ServerHelper(){}
+	private ServerHelper() {
+	}
 
-    public static boolean isClientWorld(World world){
-        return world.isRemote;
-    }
+	public static boolean isClientWorld(World world) {
+		return world.isRemote;
+	}
 
-    public static boolean isServerWorld(World world){
-        return !world.isRemote;
-    }
+	public static boolean isServerWorld(World world) {
+		return !world.isRemote;
+	}
 
-    public static boolean isSinglePlayerServer() {
+	public static boolean isSinglePlayerServer() {
 
-        return FMLCommonHandler.instance().getMinecraftServerInstance() != null;
-    }
+		return FMLCommonHandler.instance().getMinecraftServerInstance() != null;
+	}
 
-    public static boolean isMultiPlayerServer() {
+	public static boolean isMultiPlayerServer() {
 
-        return FMLCommonHandler.instance().getMinecraftServerInstance() == null;
-    }
+		return FMLCommonHandler.instance().getMinecraftServerInstance() == null;
+	}
 }

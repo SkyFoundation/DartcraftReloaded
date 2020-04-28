@@ -16,21 +16,22 @@ import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.CAPABILITY
  */
 public class attackEntityEvent {
 
-    @SubscribeEvent
-    public void AttackEntityEvent(AttackEntityEvent event) {
-        //Bane/Bleed
-        if(event.getEntity() instanceof EntityPlayer) {
-            EntityPlayer player = event.getEntityPlayer();
-            if(player.getHeldItemMainhand().hasCapability(CAPABILITY_TOOLMOD, null)) {
-                if(player.getHeldItemMainhand().getCapability(CAPABILITY_TOOLMOD, null).hasBleed()) {
-                    Potion Bane = new PotionBleeding();
-                    PotionEffect BaneEffect = new PotionEffect(Bane, 200, player.getHeldItemMainhand().getCapability(CAPABILITY_TOOLMOD, null).getBleedLevel());
-                    if(event.getTarget() instanceof EntityLivingBase) {
-                        ((EntityLivingBase) event.getTarget()).addPotionEffect(BaneEffect);
-                        DartUtils.getLogger().info("added Bane to " + event.getTarget().getName());
-                    }
-                }
-            }
-        }
-    }
+	@SubscribeEvent
+	public void AttackEntityEvent(AttackEntityEvent event) {
+		// Bane/Bleed
+		if (event.getEntity() instanceof EntityPlayer) {
+			EntityPlayer player = event.getEntityPlayer();
+			if (player.getHeldItemMainhand().hasCapability(CAPABILITY_TOOLMOD, null)) {
+				if (player.getHeldItemMainhand().getCapability(CAPABILITY_TOOLMOD, null).hasBleed()) {
+					Potion Bane = new PotionBleeding();
+					PotionEffect BaneEffect = new PotionEffect(Bane, 200,
+							player.getHeldItemMainhand().getCapability(CAPABILITY_TOOLMOD, null).getBleedLevel());
+					if (event.getTarget() instanceof EntityLivingBase) {
+						((EntityLivingBase) event.getTarget()).addPotionEffect(BaneEffect);
+						DartUtils.getLogger().info("added Bane to " + event.getTarget().getName());
+					}
+				}
+			}
+		}
+	}
 }

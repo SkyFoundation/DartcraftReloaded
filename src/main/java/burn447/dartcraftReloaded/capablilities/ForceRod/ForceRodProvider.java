@@ -16,42 +16,42 @@ import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.CAPABILITY
  */
 public class ForceRodProvider implements ICapabilitySerializable<NBTBase>, ICapabilityProvider {
 
-    private EnumFacing facing = null;
-    private IForceRodModifier instance = null;
+	private EnumFacing facing = null;
+	private IForceRodModifier instance = null;
 
-    public ForceRodProvider(Capability<IForceRodModifier> capability, EnumFacing facing){
-        if(capability != null){
-            CAPABILITY_FORCEROD = capability;
-            this.facing = facing;
-            this.instance = CAPABILITY_FORCEROD.getDefaultInstance();
-        }
-    }
+	public ForceRodProvider(Capability<IForceRodModifier> capability, EnumFacing facing) {
+		if (capability != null) {
+			CAPABILITY_FORCEROD = capability;
+			this.facing = facing;
+			this.instance = CAPABILITY_FORCEROD.getDefaultInstance();
+		}
+	}
 
-    @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        if(capability == CAPABILITY_FORCEROD)
-            return capability == getCapability();
-        else
-            return false;
-    }
+	@Override
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		if (capability == CAPABILITY_FORCEROD)
+			return capability == getCapability();
+		else
+			return false;
+	}
 
-    @Nullable
-    @Override
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == CAPABILITY_FORCEROD ? CAPABILITY_FORCEROD.<T> cast(instance) : null;
-    }
+	@Nullable
+	@Override
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		return capability == CAPABILITY_FORCEROD ? CAPABILITY_FORCEROD.<T>cast(instance) : null;
+	}
 
-    @Override
-    public NBTBase serializeNBT() {
-        return CAPABILITY_FORCEROD.getStorage().writeNBT(CAPABILITY_FORCEROD, instance, null);
-    }
+	@Override
+	public NBTBase serializeNBT() {
+		return CAPABILITY_FORCEROD.getStorage().writeNBT(CAPABILITY_FORCEROD, instance, null);
+	}
 
-    @Override
-    public void deserializeNBT(NBTBase nbt) {
-        CAPABILITY_FORCEROD.getStorage().readNBT(CAPABILITY_FORCEROD, instance, null, nbt);
-    }
+	@Override
+	public void deserializeNBT(NBTBase nbt) {
+		CAPABILITY_FORCEROD.getStorage().readNBT(CAPABILITY_FORCEROD, instance, null, nbt);
+	}
 
-    public final Capability<IForceRodModifier> getCapability(){
-        return CAPABILITY_FORCEROD;
-    }
+	public final Capability<IForceRodModifier> getCapability() {
+		return CAPABILITY_FORCEROD;
+	}
 }

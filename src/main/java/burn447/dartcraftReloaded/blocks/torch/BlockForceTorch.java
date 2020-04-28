@@ -8,22 +8,22 @@ import net.minecraft.item.ItemBlock;
 
 public class BlockForceTorch extends BlockTorch {
 
-    String name;
+	String name;
 
-    public BlockForceTorch(String name) {
-        this.name = name;
-        this.setRegistryName(name);
-        this.setTranslationKey(name);
-        this.setCreativeTab(dartcraftReloaded.creativeTab);
-        this.setLightLevel(0.9375F);
-        this.setSoundType(SoundType.WOOD);
-    }
+	public BlockForceTorch(String name) {
+		this.name = name;
+		this.setRegistryName(name);
+		this.setTranslationKey(name);
+		this.setCreativeTab(dartcraftReloaded.creativeTab);
+		this.setLightLevel(0.9375F);
+		this.setSoundType(SoundType.WOOD);
+	}
 
-    public void registerItemModel(Item itemBlock) {
-        dartcraftReloaded.proxy.registerItemRenderer(itemBlock, 0, name);
-    }
+	public void registerItemModel(Item itemBlock) {
+		dartcraftReloaded.proxy.registerItemRenderer(itemBlock, 0, name);
+	}
 
-    public Item createItemBlock() {
-        return new ItemBlock(this).setRegistryName(getRegistryName());
-    }
+	public Item createItemBlock() {
+		return new ItemBlock(this).setRegistryName(getRegistryName());
+	}
 }

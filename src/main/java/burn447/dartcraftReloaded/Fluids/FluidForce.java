@@ -15,64 +15,62 @@ import net.minecraftforge.fluids.FluidStack;
  */
 public class FluidForce extends Fluid {
 
-    private String name = "force";
+	private String name = "force";
 
-    protected static int mapColor = 0xFFFFFFFF;
-    protected static float overlayAlpha = 0.2F;
-    protected static SoundEvent emptySound = SoundEvents.ITEM_BUCKET_EMPTY;
-    protected static SoundEvent fillSound = SoundEvents.ITEM_BUCKET_FILL;
-    protected static Material material = Material.WATER;
+	protected static int mapColor = 0xFFFFFFFF;
+	protected static float overlayAlpha = 0.2F;
+	protected static SoundEvent emptySound = SoundEvents.ITEM_BUCKET_EMPTY;
+	protected static SoundEvent fillSound = SoundEvents.ITEM_BUCKET_FILL;
+	protected static Material material = Material.WATER;
 
+	public FluidForce() {
+		super("force", new ResourceLocation(References.modId, "fluids/force_still"),
+				new ResourceLocation(References.modId, "fluids/force_flow"));
 
-    public FluidForce(){
-        super("force", new ResourceLocation(References.modId, "fluids/force_still"), new ResourceLocation(References.modId, "fluids/force_flow"));
+		setRarity(EnumRarity.COMMON);
+		setLuminosity(0);
+		setDensity(2000);
+		setViscosity(1000);
+		setTemperature(120);
+		setFillSound(SoundEvents.ITEM_BUCKET_FILL);
+		FluidRegistry.addBucketForFluid(this);
+	}
 
-        setRarity(EnumRarity.COMMON);
-        setLuminosity(0);
-        setDensity(2000);
-        setViscosity(1000);
-        setTemperature(120);
-        setFillSound(SoundEvents.ITEM_BUCKET_FILL);
-        FluidRegistry.addBucketForFluid(this);
-    }
+	@Override
+	public int getColor() {
+		return mapColor;
+	}
 
-    @Override
-    public int getColor() {
-        return mapColor;
-    }
+	@Override
+	public Fluid setEmptySound(SoundEvent parSound) {
+		emptySound = parSound;
+		return this;
+	}
 
-    @Override
-    public Fluid setEmptySound(SoundEvent parSound) {
-        emptySound = parSound;
-        return this;
-    }
+	@Override
+	public Fluid setFillSound(SoundEvent parSound) {
+		fillSound = parSound;
+		return this;
+	}
 
-    @Override
-    public Fluid setFillSound(SoundEvent parSound) {
-        fillSound = parSound;
-        return this;
-    }
+	@Override
+	public SoundEvent getFillSound() {
+		return fillSound;
+	}
 
-    @Override
-    public SoundEvent getFillSound() {
-        return fillSound;
-    }
+	@Override
+	public SoundEvent getEmptySound() {
+		return emptySound;
+	}
 
-    @Override
-    public SoundEvent getEmptySound() {
-        return emptySound;
-    }
+	public Material getMaterial() {
+		return material;
+	}
 
-    public Material getMaterial()
-    {
-        return material;
-    }
-
-    @Override
-    public boolean doesVaporize(FluidStack fluidStack)
-    {
-        if (block == null)
-            return false;
-        return block.getDefaultState().getMaterial() == getMaterial();
-    }
+	@Override
+	public boolean doesVaporize(FluidStack fluidStack) {
+		if (block == null)
+			return false;
+		return block.getDefaultState().getMaterial() == getMaterial();
+	}
 }

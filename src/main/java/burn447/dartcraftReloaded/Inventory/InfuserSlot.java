@@ -14,32 +14,32 @@ import net.minecraft.util.NonNullList;
  */
 public class InfuserSlot extends Slot {
 
-    private NonNullList<Item> validInfuserModifiers = populateModifierList();
+	private NonNullList<Item> validInfuserModifiers = populateModifierList();
 
-    public InfuserSlot(IInventory inventoryIn, int index, int xPosition, int yPosition){
-        super(inventoryIn, index, xPosition, yPosition);
-    }
+	public InfuserSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+		super(inventoryIn, index, xPosition, yPosition);
+	}
 
-    @Override
-    public boolean isItemValid(ItemStack item){
+	@Override
+	public boolean isItemValid(ItemStack item) {
 
-        for(Item stack : validInfuserModifiers) {
-            if (item.getItem() == stack) {
-                return true;
-            }
-        }
-        return false;
-    }
+		for (Item stack : validInfuserModifiers) {
+			if (item.getItem() == stack) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-    private NonNullList<Item> populateModifierList(){
-        NonNullList<Item> list = NonNullList.<Item>withSize(25, null);
+	private NonNullList<Item> populateModifierList() {
+		NonNullList<Item> list = NonNullList.<Item>withSize(25, null);
 
-        list.add(ModItems.nuggetForce);
-        list.add(Items.SUGAR);
-        list.add(ModBlocks.forceLog.createItemBlock());
-        list.add(Items.FLINT);
-        list.add(Items.EXPERIENCE_BOTTLE);
+		list.add(ModItems.nuggetForce);
+		list.add(Items.SUGAR);
+		list.add(ModBlocks.forceLog.createItemBlock());
+		list.add(Items.FLINT);
+		list.add(Items.EXPERIENCE_BOTTLE);
 
-        return list;
-    }
+		return list;
+	}
 }

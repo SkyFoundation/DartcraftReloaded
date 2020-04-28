@@ -21,65 +21,64 @@ import net.minecraftforge.items.IItemHandler;
  */
 public class BlockInfuser extends BlockBase {
 
-    public BlockInfuser(String name) {
-        super(Material.ROCK, name);
-        this.setCreativeTab(dartcraftReloaded.creativeTab);
-        this.setRegistryName(name);
-        this.setTranslationKey(name);
-    }
+	public BlockInfuser(String name) {
+		super(Material.ROCK, name);
+		this.setCreativeTab(dartcraftReloaded.creativeTab);
+		this.setRegistryName(name);
+		this.setTranslationKey(name);
+	}
 
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    public boolean isFullBlock(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isFullBlock(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    public boolean isBlockNormalCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isBlockNormalCube(IBlockState state) {
+		return false;
+	}
 
+	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		TileEntityInfuser te = (TileEntityInfuser) world.getTileEntity(pos);
+		if (te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
 
-    @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TileEntityInfuser te = (TileEntityInfuser) world.getTileEntity(pos);
-        if (te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+			IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+			for (int slot = 0; slot < handler.getSlots() - 1; slot++) {
+				ItemStack stack = handler.getStackInSlot(slot);
+				InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+			}
+			super.breakBlock(world, pos, state);
+		}
+	}
 
-            IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            for (int slot = 0; slot < handler.getSlots() - 1; slot++) {
-                ItemStack stack = handler.getStackInSlot(slot);
-                InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
-            }
-            super.breakBlock(world, pos, state);
-        }
-    }
+	@Override
+	public boolean hasTileEntity(IBlockState state) {
+		return true;
+	}
 
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return new TileEntityInfuser();
+	}
 
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityInfuser();
-    }
-
-    @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
-            playerIn.openGui(dartcraftReloaded.instance, DCRGUIHandler.INFUSER, worldIn, pos.getX(), pos.getY(), pos.getZ());
-        }
-        return true;
-    }
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (!worldIn.isRemote) {
+			playerIn.openGui(dartcraftReloaded.instance, DCRGUIHandler.INFUSER, worldIn, pos.getX(), pos.getY(),
+					pos.getZ());
+		}
+		return true;
+	}
 }
-

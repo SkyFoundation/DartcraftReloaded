@@ -16,42 +16,42 @@ import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.CAPABILITY
  */
 public class ShearableProvider implements ICapabilitySerializable<NBTBase>, ICapabilityProvider {
 
-    private EnumFacing facing = null;
-    private IShearableMob instance = null;
+	private EnumFacing facing = null;
+	private IShearableMob instance = null;
 
-    public ShearableProvider(Capability<IShearableMob> capability, EnumFacing facing){
-        if(capability != null){
-            CAPABILITY_SHEARABLE = capability;
-            this.facing = facing;
-            this.instance = CAPABILITY_SHEARABLE.getDefaultInstance();
-        }
-    }
+	public ShearableProvider(Capability<IShearableMob> capability, EnumFacing facing) {
+		if (capability != null) {
+			CAPABILITY_SHEARABLE = capability;
+			this.facing = facing;
+			this.instance = CAPABILITY_SHEARABLE.getDefaultInstance();
+		}
+	}
 
-    @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        if(capability == CAPABILITY_SHEARABLE)
-            return capability == getCapability();
-        else
-            return false;
-    }
+	@Override
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		if (capability == CAPABILITY_SHEARABLE)
+			return capability == getCapability();
+		else
+			return false;
+	}
 
-    @Nullable
-    @Override
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == CAPABILITY_SHEARABLE ? CAPABILITY_SHEARABLE.<T> cast(instance) : null;
-    }
+	@Nullable
+	@Override
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		return capability == CAPABILITY_SHEARABLE ? CAPABILITY_SHEARABLE.<T>cast(instance) : null;
+	}
 
-    @Override
-    public NBTBase serializeNBT() {
-        return CAPABILITY_SHEARABLE.getStorage().writeNBT(CAPABILITY_SHEARABLE, instance, null);
-    }
+	@Override
+	public NBTBase serializeNBT() {
+		return CAPABILITY_SHEARABLE.getStorage().writeNBT(CAPABILITY_SHEARABLE, instance, null);
+	}
 
-    @Override
-    public void deserializeNBT(NBTBase nbt) {
-        CAPABILITY_SHEARABLE.getStorage().readNBT(CAPABILITY_SHEARABLE, instance, null, nbt);
-    }
+	@Override
+	public void deserializeNBT(NBTBase nbt) {
+		CAPABILITY_SHEARABLE.getStorage().readNBT(CAPABILITY_SHEARABLE, instance, null, nbt);
+	}
 
-    public final Capability<IShearableMob> getCapability(){
-        return CAPABILITY_SHEARABLE;
-    }
+	public final Capability<IShearableMob> getCapability() {
+		return CAPABILITY_SHEARABLE;
+	}
 }

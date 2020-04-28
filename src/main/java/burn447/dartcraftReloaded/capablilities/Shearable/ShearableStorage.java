@@ -11,23 +11,23 @@ import javax.annotation.Nullable;
  * Created by BURN447 on 7/6/2018.
  */
 public class ShearableStorage implements Capability.IStorage<IShearableMob> {
-    @Nullable
-    @Override
-    public NBTBase writeNBT(Capability<IShearableMob> capability, IShearableMob instance, EnumFacing side) {
-        NBTTagCompound nbt = new NBTTagCompound();
+	@Nullable
+	@Override
+	public NBTBase writeNBT(Capability<IShearableMob> capability, IShearableMob instance, EnumFacing side) {
+		NBTTagCompound nbt = new NBTTagCompound();
 
-        nbt.setInteger("timer", instance.getTimer());
-        nbt.setBoolean("shearble", instance.canBeSheared());
+		nbt.setInteger("timer", instance.getTimer());
+		nbt.setBoolean("shearble", instance.canBeSheared());
 
-        return nbt;
-    }
+		return nbt;
+	}
 
-    @Override
-    public void readNBT(Capability<IShearableMob> capability, IShearableMob instance, EnumFacing side, NBTBase nbtIn) {
-        if(nbtIn instanceof NBTTagCompound){
-            NBTTagCompound nbt = (NBTTagCompound) nbtIn;
+	@Override
+	public void readNBT(Capability<IShearableMob> capability, IShearableMob instance, EnumFacing side, NBTBase nbtIn) {
+		if (nbtIn instanceof NBTTagCompound) {
+			NBTTagCompound nbt = (NBTTagCompound) nbtIn;
 
-            instance.setTimer(nbt.getInteger("timer"));
-        }
-    }
+			instance.setTimer(nbt.getInteger("timer"));
+		}
+	}
 }

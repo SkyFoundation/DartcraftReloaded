@@ -10,22 +10,31 @@ import net.minecraftforge.common.util.INBTSerializable;
  */
 public interface IForceRodModifier extends INBTSerializable<NBTTagCompound> {
 
-    boolean isRodOfHealing(int level);
-    void setRodOfHealing(boolean newVal, int level);
+	boolean isRodOfHealing(int level);
 
-    boolean hasCamoModifier();
-    void setCamoModifier(boolean newVal);
+	void setRodOfHealing(boolean newVal, int level);
 
-    BlockPos getHomeLocation();
-    void setHomeLocation(BlockPos pos);
-    void teleportPlayerToLocation(EntityPlayer player, BlockPos pos);
-    boolean hasEnderModifier();
-    void setEnderModifier(boolean newVal);
-    boolean isRodofEnder();
+	boolean hasCamoModifier();
 
-    boolean hasSightModifier();
-    void setSightModifier(boolean newVal);
+	void setCamoModifier(boolean newVal);
 
-    boolean hasLight();
-    void setLight(boolean val);
+	BlockPos getHomeLocation();
+
+	void setHomeLocation(BlockPos pos);
+
+	void teleportPlayerToLocation(EntityPlayer player, BlockPos pos);
+
+	boolean hasEnderModifier();
+
+	void setEnderModifier(boolean newVal);
+
+	boolean isRodofEnder();
+
+	boolean hasSightModifier();
+
+	void setSightModifier(boolean newVal);
+
+	boolean hasLight();
+
+	void setLight(boolean val);
 }

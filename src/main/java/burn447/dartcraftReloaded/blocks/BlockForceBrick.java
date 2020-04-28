@@ -10,25 +10,25 @@ import net.minecraft.item.ItemBlock;
  */
 public class BlockForceBrick extends BlockBase {
 
-    private String name;
+	private String name;
 
-    public BlockForceBrick(String name){
-        super(Material.ROCK, name);
-        this.setHardness(50.0F);
-        this.setResistance(200.0F);
-        this.setRegistryName(name);
-        this.setTranslationKey(name);
-        this.setCreativeTab(dartcraftReloaded.creativeTab);
-        this.name = name;
-        this.oreName = "forceBrick";
-        this.setHarvestLevel("pickaxe", 3);
-    }
+	public BlockForceBrick(String name) {
+		super(Material.ROCK, name);
+		this.setHardness(50.0F);
+		this.setResistance(200.0F);
+		this.setRegistryName(name);
+		this.setTranslationKey(name);
+		this.setCreativeTab(dartcraftReloaded.creativeTab);
+		this.name = name;
+		this.oreName = "forceBrick";
+		this.setHarvestLevel("pickaxe", 3);
+	}
 
-    public Item createItemBlock() {
-        return new ItemBlock(this).setRegistryName(getRegistryName());
-    }
+	public Item createItemBlock() {
+		return new ItemBlock(this).setRegistryName(getRegistryName());
+	}
 
-    public void registerItemModel(Item itemBlock) {
-        dartcraftReloaded.proxy.registerItemRenderer(itemBlock, 0, name);
-    }
+	public void registerItemModel(Item itemBlock) {
+		dartcraftReloaded.proxy.registerItemRenderer(itemBlock, 0, name);
+	}
 }

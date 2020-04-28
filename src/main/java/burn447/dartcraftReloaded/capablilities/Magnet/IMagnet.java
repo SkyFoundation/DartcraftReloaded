@@ -5,10 +5,11 @@ import net.minecraftforge.common.util.INBTSerializable;
 
 public interface IMagnet extends INBTSerializable<NBTTagCompound> {
 
-    boolean isActivated();
+	boolean isActivated();
 
-    void activate();
-    void deactivate();
+	void activate();
 
-    void setActivation(boolean active);
+	void deactivate();
+
+	void setActivation(boolean active);
 }

@@ -7,16 +7,17 @@ import org.lwjgl.input.Keyboard;
  */
 public final class StringHelper {
 
-    private StringHelper(){ }
+	private StringHelper() {
+	}
 
-    public static String toString(Object o, String nullDefault){
-        return (o != null) ? o.toString() : nullDefault;
-    }
+	public static String toString(Object o, String nullDefault) {
+		return (o != null) ? o.toString() : nullDefault;
+	}
 
-    public static boolean isShiftKeyDown(){
-        return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
-    }
+	public static boolean isShiftKeyDown() {
+		return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
+	}
 
-    public static boolean displayShiftForDetail = true;
+	public static boolean displayShiftForDetail = true;
 
 }

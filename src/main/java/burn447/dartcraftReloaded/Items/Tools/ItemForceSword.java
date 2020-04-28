@@ -37,107 +37,107 @@ import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.CAPABILITY
  */
 public class ItemForceSword extends ItemSword {
 
-    private static String name;
+	private static String name;
 
-    public ItemForceSword(String name) {
-        super(dartcraftReloaded.forceToolMaterial);
-        this.setRegistryName(name);
-        this.setTranslationKey(name);
-        this.setCreativeTab(dartcraftReloaded.creativeTab);
-        this.name = name;
-    }
+	public ItemForceSword(String name) {
+		super(dartcraftReloaded.forceToolMaterial);
+		this.setRegistryName(name);
+		this.setTranslationKey(name);
+		this.setCreativeTab(dartcraftReloaded.creativeTab);
+		this.name = name;
+	}
 
-    public void registerItemModel() {
-        dartcraftReloaded.proxy.registerItemRenderer(this, 0, name);
-    }
+	public void registerItemModel() {
+		dartcraftReloaded.proxy.registerItemRenderer(this, 0, name);
+	}
 
-    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
-        if ((double)state.getBlockHardness(worldIn, pos) != 0.0D)
-        {
-            stack.damageItem(2, entityLiving);
-        }
-        return true;
-    }
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos,
+			EntityLivingBase entityLiving) {
+		if ((double) state.getBlockHardness(worldIn, pos) != 0.0D) {
+			stack.damageItem(2, entityLiving);
+		}
+		return true;
+	}
 
-    public boolean canHarvestBlock(IBlockState blockIn)
-    {
-        return blockIn.getBlock() == Blocks.WEB;
-    }
+	public boolean canHarvestBlock(IBlockState blockIn) {
+		return blockIn.getBlock() == Blocks.WEB;
+	}
 
-    public float getAttackDamage() {
-        return dartcraftReloaded.forceToolMaterial.getAttackDamage();
-    }
+	public float getAttackDamage() {
+		return dartcraftReloaded.forceToolMaterial.getAttackDamage();
+	}
 
-    public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
-        Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
+	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
+		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
 
-        if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
-        {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.getAttackDamage(), 0));
-            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4000000953674316D, 0));
-        }
+		if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
+			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER,
+					"Weapon modifier", (double) this.getAttackDamage(), 0));
+			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
+					new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4000000953674316D, 0));
+		}
 
-        return multimap;
-    }
+		return multimap;
+	}
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        //Wing Modifier
-        ItemStack heldStack = playerIn.getHeldItem(handIn);
-        if(heldStack.hasCapability(CAPABILITY_TOOLMOD, null)) {
-            if(heldStack.getCapability(CAPABILITY_TOOLMOD, null).hasWing()) {
-                Vec3d vec = playerIn.getLookVec();
-                double wantedVelocity = 1.7;
-                playerIn.motionX = vec.x * wantedVelocity;
-                playerIn.motionY = vec.y * wantedVelocity;
-                playerIn.motionZ = vec.z * wantedVelocity;
-                worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (worldIn.rand.nextFloat() - worldIn.rand.nextFloat()) * 0.8F);
-            }
-        }
-        return super.onItemRightClick(worldIn, playerIn, handIn);
-    }
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+		// Wing Modifier
+		ItemStack heldStack = playerIn.getHeldItem(handIn);
+		if (heldStack.hasCapability(CAPABILITY_TOOLMOD, null)) {
+			if (heldStack.getCapability(CAPABILITY_TOOLMOD, null).hasWing()) {
+				Vec3d vec = playerIn.getLookVec();
+				double wantedVelocity = 1.7;
+				playerIn.motionX = vec.x * wantedVelocity;
+				playerIn.motionY = vec.y * wantedVelocity;
+				playerIn.motionZ = vec.z * wantedVelocity;
+				worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH,
+						SoundCategory.BLOCKS, 0.5F,
+						2.6F + (worldIn.rand.nextFloat() - worldIn.rand.nextFloat()) * 0.8F);
+			}
+		}
+		return super.onItemRightClick(worldIn, playerIn, handIn);
+	}
 
-    @Override
-    public float getDestroySpeed(ItemStack stack, IBlockState state) {
-        Block block = state.getBlock();
+	@Override
+	public float getDestroySpeed(ItemStack stack, IBlockState state) {
+		Block block = state.getBlock();
 
-        if (block == Blocks.WEB)
-        {
-            return 15.0F;
-        }
-        else
-        {
-            Material material = state.getMaterial();
-            return material != Material.PLANTS && material != Material.VINE && material != Material.CORAL && material != Material.LEAVES && material != Material.GOURD ? 1.0F : 1.5F;
-        }
-    }
+		if (block == Blocks.WEB) {
+			return 15.0F;
+		} else {
+			Material material = state.getMaterial();
+			return material != Material.PLANTS && material != Material.VINE && material != Material.CORAL
+					&& material != Material.LEAVES && material != Material.GOURD ? 1.0F : 1.5F;
+		}
+	}
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        if(!stack.hasCapability(CAPABILITY_TOOLMOD, null))
-            return new ToolModProvider(CAPABILITY_TOOLMOD, null);
-        else
-            return null;
-    }
+	@Nullable
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+		if (!stack.hasCapability(CAPABILITY_TOOLMOD, null))
+			return new ToolModProvider(CAPABILITY_TOOLMOD, null);
+		else
+			return null;
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List toolTip, ITooltipFlag flagIn) {
-        if(stack.getCapability(CAPABILITY_TOOLMOD, null).hasWing())
-            toolTip.add("Wing");
-        if(stack.getCapability(CAPABILITY_TOOLMOD, null).hasBleed())
-            toolTip.add("Bleeding " + stack.getCapability(CAPABILITY_TOOLMOD, null).getBleedLevel());
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List toolTip, ITooltipFlag flagIn) {
+		if (stack.getCapability(CAPABILITY_TOOLMOD, null).hasWing())
+			toolTip.add("Wing");
+		if (stack.getCapability(CAPABILITY_TOOLMOD, null).hasBleed())
+			toolTip.add("Bleeding " + stack.getCapability(CAPABILITY_TOOLMOD, null).getBleedLevel());
+	}
 
-    @Override
-    public int getItemEnchantability() {
-        return 0;
-    }
+	@Override
+	public int getItemEnchantability() {
+		return 0;
+	}
 
-    @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        return false;
-    }
+	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+		return false;
+	}
 
 }

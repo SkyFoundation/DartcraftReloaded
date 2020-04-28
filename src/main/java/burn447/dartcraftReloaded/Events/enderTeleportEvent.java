@@ -11,13 +11,13 @@ import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.CAPABILITY
  */
 public class enderTeleportEvent {
 
-    @SubscribeEvent
-    public void onEnderTeleportEvent(EnderTeleportEvent event){
-        if(event.getEntity() instanceof EntityEnderman){
-            EntityEnderman enderman = ((EntityEnderman) event.getEntity());
-            if(!enderman.getCapability(CAPABILITY_BANE, null).canTeleport()){
-                event.setCanceled(true);
-            }
-        }
-    }
+	@SubscribeEvent
+	public void onEnderTeleportEvent(EnderTeleportEvent event) {
+		if (event.getEntity() instanceof EntityEnderman) {
+			EntityEnderman enderman = ((EntityEnderman) event.getEntity());
+			if (!enderman.getCapability(CAPABILITY_BANE, null).canTeleport()) {
+				event.setCanceled(true);
+			}
+		}
+	}
 }

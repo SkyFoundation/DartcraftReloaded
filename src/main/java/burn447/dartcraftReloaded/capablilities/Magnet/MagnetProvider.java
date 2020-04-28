@@ -13,45 +13,43 @@ import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.CAPABILITY
 
 public class MagnetProvider implements ICapabilitySerializable<NBTBase>, ICapabilityProvider {
 
-    private EnumFacing facing = null;
+	private EnumFacing facing = null;
 
-    private IMagnet instance = null;
+	private IMagnet instance = null;
 
+	public MagnetProvider(Capability<IMagnet> capability, EnumFacing facing) {
+		if (capability != null) {
+			CAPABILITY_MAGNET = capability;
+			this.facing = facing;
+			this.instance = CAPABILITY_MAGNET.getDefaultInstance();
+		}
+	}
 
-    public MagnetProvider(Capability<IMagnet> capability, EnumFacing facing){
-        if(capability != null){
-            CAPABILITY_MAGNET = capability;
-            this.facing = facing;
-            this.instance = CAPABILITY_MAGNET.getDefaultInstance();
-        }
-    }
+	@Override
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		if (capability == CAPABILITY_MAGNET)
+			return capability == getCapability();
+		else
+			return false;
+	}
 
+	@Nullable
+	@Override
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		return capability == CAPABILITY_MAGNET ? CAPABILITY_MAGNET.<T>cast(instance) : null;
+	}
 
-    @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        if(capability == CAPABILITY_MAGNET)
-            return capability == getCapability();
-        else
-            return false;
-    }
+	@Override
+	public NBTBase serializeNBT() {
+		return CAPABILITY_MAGNET.getStorage().writeNBT(CAPABILITY_MAGNET, instance, null);
+	}
 
-    @Nullable
-    @Override
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == CAPABILITY_MAGNET ? CAPABILITY_MAGNET.<T> cast(instance) : null;
-    }
+	@Override
+	public void deserializeNBT(NBTBase nbt) {
+		CAPABILITY_MAGNET.getStorage().readNBT(CAPABILITY_MAGNET, instance, null, nbt);
+	}
 
-    @Override
-    public NBTBase serializeNBT() {
-        return CAPABILITY_MAGNET.getStorage().writeNBT(CAPABILITY_MAGNET, instance, null);
-    }
-
-    @Override
-    public void deserializeNBT(NBTBase nbt) {
-        CAPABILITY_MAGNET.getStorage().readNBT(CAPABILITY_MAGNET, instance, null, nbt);
-    }
-
-    public final Capability<IMagnet> getCapability(){
-        return CAPABILITY_MAGNET;
-    }
+	public final Capability<IMagnet> getCapability() {
+		return CAPABILITY_MAGNET;
+	}
 }

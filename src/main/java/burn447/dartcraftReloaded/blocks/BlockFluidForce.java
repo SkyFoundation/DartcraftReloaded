@@ -16,16 +16,16 @@ import static burn447.dartcraftReloaded.Fluids.ModFluids.fluidForce;
  */
 public class BlockFluidForce extends BlockFluidClassic {
 
-    public BlockFluidForce(){
-        super(fluidForce, fluidForce.getMaterial());
-        this.setRegistryName("fluidForce");
-        this.setTranslationKey("fluid_force");
-    }
+	public BlockFluidForce() {
+		super(fluidForce, fluidForce.getMaterial());
+		this.setRegistryName("fluidForce");
+		this.setTranslationKey("fluid_force");
+	}
 
-    @Override
-    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (entityIn instanceof EntityLivingBase) {
-            ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 10, 10));
-        }
-    }
+	@Override
+	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+		if (entityIn instanceof EntityLivingBase) {
+			((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 10, 10));
+		}
+	}
 }

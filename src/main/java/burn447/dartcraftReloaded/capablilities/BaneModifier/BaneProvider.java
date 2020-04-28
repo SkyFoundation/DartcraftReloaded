@@ -17,46 +17,45 @@ import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.CAPABILITY
  */
 public class BaneProvider implements ICapabilitySerializable<NBTBase>, ICapabilityProvider {
 
-    private EnumFacing facing = null;
+	private EnumFacing facing = null;
 
-    private IBaneModifier instance = null;
+	private IBaneModifier instance = null;
 
+	public BaneProvider(Capability<IBaneModifier> capability, EnumFacing facing) {
+		if (capability != null) {
+			CAPABILITY_BANE = capability;
+			this.facing = facing;
+			this.instance = CAPABILITY_BANE.getDefaultInstance();
+		}
+	}
 
-    public BaneProvider(Capability<IBaneModifier> capability, EnumFacing facing){
-        if(capability != null){
-            CAPABILITY_BANE = capability;
-            this.facing = facing;
-            this.instance = CAPABILITY_BANE.getDefaultInstance();
-        }
-    }
+	@Override
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		if (capability == CAPABILITY_BANE)
+			return capability == getCapability();
+		else
+			return false;
+	}
 
-    @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        if(capability == CAPABILITY_BANE)
-            return capability == getCapability();
-        else
-            return false;
-    }
+	@Nullable
+	@Override
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		return capability == CAPABILITY_BANE ? CAPABILITY_BANE.<T>cast(instance) : null;
+	}
 
-    @Nullable
-    @Override
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == CAPABILITY_BANE ? CAPABILITY_BANE.<T> cast(instance) : null;
-    }
+	@Override
+	public NBTBase serializeNBT() {
+		NBTTagCompound nbt = new NBTTagCompound();
 
-    @Override
-    public NBTBase serializeNBT() {
-        NBTTagCompound nbt = new NBTTagCompound();
+		return nbt;
+	}
 
-        return nbt;
-    }
+	@Override
+	public void deserializeNBT(NBTBase nbt) {
 
-    @Override
-    public void deserializeNBT(NBTBase nbt) {
+	}
 
-    }
-
-    public Capability<IBaneModifier> getCapability(){
-        return CAPABILITY_BANE;
-    }
+	public Capability<IBaneModifier> getCapability() {
+		return CAPABILITY_BANE;
+	}
 }

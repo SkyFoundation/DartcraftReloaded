@@ -7,14 +7,14 @@ import static burn447.dartcraftReloaded.Handlers.DCRCapabilityHandler.CAPABILITY
 
 public class onLootingEvent {
 
-    @SubscribeEvent
-    public void onLooting(LootingLevelEvent event) {
-        int level = event.getLootingLevel();
+	@SubscribeEvent
+	public void onLooting(LootingLevelEvent event) {
+		int level = event.getLootingLevel();
 
-        if(event.getDamageSource().getTrueSource().hasCapability(CAPABILITY_PLAYERMOD, null)) {
-            level += event.getDamageSource().getTrueSource().getCapability(CAPABILITY_PLAYERMOD, null).getLuckLevel();
-        }
+		if (event.getDamageSource().getTrueSource().hasCapability(CAPABILITY_PLAYERMOD, null)) {
+			level += event.getDamageSource().getTrueSource().getCapability(CAPABILITY_PLAYERMOD, null).getLuckLevel();
+		}
 
-        event.setLootingLevel(level);
-    }
+		event.setLootingLevel(level);
+	}
 }
