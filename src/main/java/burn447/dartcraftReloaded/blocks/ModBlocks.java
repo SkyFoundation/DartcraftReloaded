@@ -1,6 +1,8 @@
 package burn447.dartcraftReloaded.blocks;
 
 import burn447.dartcraftReloaded.blocks.fire.BlockForceFire;
+import burn447.dartcraftReloaded.blocks.fire.BlockForceFireAAA;
+import burn447.dartcraftReloaded.blocks.fire.BlockForceFireCCC;
 import burn447.dartcraftReloaded.blocks.torch.BlockForceTorch;
 import burn447.dartcraftReloaded.blocks.torch.BlockTimetorch;
 import burn447.dartcraftReloaded.dartcraftReloaded;
@@ -50,14 +52,29 @@ public class ModBlocks {
 
 	// fires
 	public static BlockForceFire fireNether = new BlockForceFire("fire_nether");
-
+	
+	public static BlockForceFireAAA longs = new BlockForceFireAAA("longs");
+	
+	//public static BlockForceFireCCC longs = new BlockForceFireCCC("longs");
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void register(IForgeRegistry<Block> registry) {
 
 		registry.registerAll(orePower, forceSapling, forceLog, forceLeaves, infuser, blockFluidForce, forceFurnace,
 				forcePlanks, LIT_FORCEFURNACE, forceBrickRed, forceBrickYellow, forceBrickGreen, forceBrickBlue,
 				forceBrickWhite, forceBrickBlack, forceBrickBrown, forceBrickOrange, forceBrickLightBlue,
 				forceBrickMagenta, forceBrickPink, forceBrickLightGray, forceBrickLime, forceBrickCyan,
-				forceBrickPurple, forceBrickGray, forceBrick, forceTorch, timetorch, fireNether);
+				forceBrickPurple, forceBrickGray, forceBrick, forceTorch, timetorch, fireNether, longs);
 
 	}
 
@@ -73,7 +90,8 @@ public class ModBlocks {
 				forceBrickCyan.createItemBlock(), forceBrickPurple.createItemBlock(), forceBrickGray.createItemBlock(),
 				forceBrick.createItemBlock(), forceTorch.createItemBlock(), timetorch.createItemBlock(),
 
-				fireNether.createItemBlock());
+				fireNether.createItemBlock(), longs.createItemBlock());
+		
 
 	}
 
@@ -108,6 +126,8 @@ public class ModBlocks {
 		timetorch.registerItemModel(Item.getItemFromBlock(timetorch));
 
 		fireNether.registerItemModel(Item.getItemFromBlock(fireNether));
+		
+		longs.registerItemModel(Item.getItemFromBlock(longs));
 	}
 
 	public static void registerNames() {

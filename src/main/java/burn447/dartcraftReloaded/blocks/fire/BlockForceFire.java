@@ -3,6 +3,7 @@ package burn447.dartcraftReloaded.blocks.fire;
 import burn447.dartcraftReloaded.dartcraftReloaded;
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -30,9 +31,11 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Random;
 
-public class BlockForceFire extends Block {
-
+public class BlockForceFire extends Block
+{
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 15);
+
+	
 	public static final PropertyBool NORTH = PropertyBool.create("north");
 	public static final PropertyBool EAST = PropertyBool.create("east");
 	public static final PropertyBool SOUTH = PropertyBool.create("south");
@@ -44,11 +47,20 @@ public class BlockForceFire extends Block {
 	protected int speed = 10;
 	protected String name;
 
-	public BlockForceFire(String name) {
+	public BlockForceFire(String name)
+	{
 		super(Material.FIRE);
 		this.setRegistryName(name);
 		this.setTranslationKey(name);
 		this.name = name;
+		
+		
+		this.setHardness(0.0F);
+		this.setLightLevel(1.0F);
+		this.setSoundType(SoundType.CLOTH);
+		this.disableStats();
+		
+		
 		this.setCreativeTab(dartcraftReloaded.creativeTab);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, Integer.valueOf(0))
 				.withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false))
@@ -58,56 +70,51 @@ public class BlockForceFire extends Block {
 		this.init();
 	}
 
-	public void registerItemModel(Item itemBlock) {
+	public void registerItemModel(Item itemBlock)
+	{
 		dartcraftReloaded.proxy.registerItemRenderer(itemBlock, 0, name);
 	}
 
-	public Item createItemBlock() {
+	public Item createItemBlock()
+	{
 		return new ItemBlock(this).setRegistryName(getRegistryName());
 	}
 
+	/*
 	@Override
-	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
-		if (!this.canPlaceBlockAt((World) world, pos)) {
+	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor)
+	{
+		if (!this.canPlaceBlockAt((World) world, pos))
+		{
 			((World) world).setBlockToAir(pos);
 			System.out.println("Oppos There arn't any block able to burn");
 			return;
-		} else {
+		} else
+		{
 
 			System.out.println("Yeah keepBurning");
 
 		}
 	}
-
-	/*
-	 * 
-	 * @Override public IBlockState getActualState(IBlockState state, IBlockAccess
-	 * worldIn, BlockPos pos) { if
-	 * (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(),
-	 * EnumFacing.UP) && ! canCatchFire(worldIn, pos.down() )) { return
-	 * state.withProperty(NORTH, this.canCatchFire(worldIn, pos.north() ))
-	 * .withProperty(EAST, this.canCatchFire(worldIn, pos.east() ))
-	 * .withProperty(SOUTH, this.canCatchFire(worldIn, pos.south()))
-	 * .withProperty(WEST, this.canCatchFire(worldIn, pos.west()))
-	 * .withProperty(UPPER, this.canCatchFire(worldIn, pos.up())); } return
-	 * this.getDefaultState(); }
-	 */
-
-	public void init() {
+	*/
+	
+	public void init()
+	{
 		setFireInfo(Blocks.GRASS, Blocks.DIRT);
 		setFireInfo(Blocks.DIRT, Blocks.NETHERRACK);
 		setFireInfo(Blocks.STONE, Blocks.NETHERRACK);
 		setFireInfo(Blocks.REDSTONE_BLOCK, Blocks.GLOWSTONE);
 	}
 
-	public void setFireInfo(Block blockIn, Block blockOut) {
+	public void setFireInfo(Block blockIn, Block blockOut)
+	{
 		if (blockIn == Blocks.AIR)
 			throw new IllegalArgumentException("Tried to set air on fire... This is bad.");
 		this.SMELT_MAP.put(blockIn, blockOut);
 	}
 
+	
 	@Override
-	@Nullable
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		return NULL_AABB;
 	}
@@ -128,38 +135,80 @@ public class BlockForceFire extends Block {
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	{
+		Block obj = worldIn.getBlockState(pos.down()).getBlock();
+		
+		System.out.println("现在冶炼块我们有没有冶炼" + obj);
+		
+		if (this.SMELT_MAP.get(obj) == null)
+			return;
+		worldIn.setBlockState(pos, this.SMELT_MAP.get(obj).getDefaultState());
+		return;
+		
+		
+		/*
 		if (!worldIn.getGameRules().getBoolean("doFireTick"))
 			return;
+		
 		if (!worldIn.isAreaLoaded(pos, 2))
 			return; // Forge: prevent loading unloaded chunks when spreading fire
+		
 
-		if (!this.canPlaceBlockAt(worldIn, pos)) {
+		if (!this.canPlaceBlockAt(worldIn, pos))
+		{
 			worldIn.setBlockToAir(pos);
-			System.out.println("Oppos There arn't any block able to burn");
+			System.out.println("对面没有可以燃烧的障碍物");
 			return;
-		} else {
-
-			System.out.println("Yeah keepBurning");
-
+		}
+		else
+		{
+			System.out.println("是的，一直烧");
 		}
 
 		int i = ((Integer) state.getValue(AGE)).intValue();
-
-		if (i < speed) {
-			state = state.withProperty(AGE, Integer.valueOf(i + rand.nextInt(3) / 2));
-			worldIn.setBlockState(pos, state, 4);
-			System.out.println("Updateing Age" + state.getValue(AGE));
-		} else {
+		System.out.println("更新啦偶尔：:" + i);
+		
+		
+		
+		
+		if (i < 1)
+		{
 			Block obj = worldIn.getBlockState(pos.down()).getBlock();
-			System.out.println("Now Smelt Block do we have smelt  for" + obj);
+			
+			System.out.println("现在冶炼块我们有没有冶炼" + obj);
+			
 			if (this.SMELT_MAP.get(obj) == null)
 				return;
 			worldIn.setBlockState(pos, this.SMELT_MAP.get(obj).getDefaultState());
 			return;
 		}
+		*/
+		
+		/*
+		//if (i < speed)
+		if (i < 1)
+		{
+			state = state.withProperty(AGE, Integer.valueOf(i + rand.nextInt(3) / 2));
+			worldIn.setBlockState(pos, state, 4);
+			
+			System.out.println("更新年龄:" + state.getValue(AGE));
+			
+		}
+		else 
+		{
+			Block obj = worldIn.getBlockState(pos.down()).getBlock();
+			
+			System.out.println("现在冶炼块我们有没有冶炼" + obj);
+			
+			if (this.SMELT_MAP.get(obj) == null)
+				return;
+			worldIn.setBlockState(pos, this.SMELT_MAP.get(obj).getDefaultState());
+			return;
+		}
+		*/
 
-		System.out.println("Catching Fires");
+		//System.out.println("着火");
 
 		// this.tryCatchFire(worldIn, pos.east(), 300 , rand, i );
 		// this.tryCatchFire(worldIn, pos.west(), 300 , rand, i );
@@ -167,6 +216,9 @@ public class BlockForceFire extends Block {
 		// this.tryCatchFire(worldIn, pos.up(), 250 , rand, i );
 		// this.tryCatchFire(worldIn, pos.north(), 300 , rand, i );
 		// this.tryCatchFire(worldIn, pos.south(), 300 , rand, i );
+		
+		
+		
 		/*
 		 * for (int k = -1; k <= 1; ++k) { for (int l = -1; l <= 1; ++l) { for (int i1 =
 		 * -1; i1 <= 4; ++i1) { if (k != 0 || i1 != 0 || l != 0) { int j1 = 100;
@@ -188,13 +240,17 @@ public class BlockForceFire extends Block {
 	}
 
 	// 随机生成火
-	private void tryCatchFire(World worldIn, BlockPos pos, int chance, Random random, int age) {
+	private void tryCatchFire(World worldIn, BlockPos pos, int chance, Random random, int age)
+	{
 		int i = 20;
-		if (random.nextInt(chance) < i) {
-			if (random.nextInt(age + 10) < 5) {
+		if (random.nextInt(chance) < i)
+		{
+			if (random.nextInt(age + 10) < 5)
+			{
 				int j = age + random.nextInt(5) / 4;
 
-				if (j > 15) {
+				if (j > 15)
+				{
 					j = 15;
 				}
 
@@ -204,9 +260,16 @@ public class BlockForceFire extends Block {
 		}
 	}
 
-	private boolean canNeighborCatchFire(World worldIn, BlockPos pos) {
-		for (EnumFacing enumfacing : EnumFacing.values()) {
-			if (this.canCatchFire(worldIn, pos.offset(enumfacing))) {
+	private boolean canNeighborCatchFire(World worldIn, BlockPos pos)
+	{
+		//: EnumFacing.Plane.HORIZONTAL
+		//for (EnumFacing enumfacing : EnumFacing.values())
+			
+		for (EnumFacing enumfacing : EnumFacing.values())
+		{
+			//if (this.canCatchFire(worldIn, pos.offset(enumfacing)))
+			if (this.canCatchFire(worldIn, pos.down().offset(enumfacing)))
+			{
 				return true;
 			}
 		}
@@ -214,15 +277,23 @@ public class BlockForceFire extends Block {
 		return false;
 	}
 
+	
 	@Override
-	public boolean isCollidable() {
+	public boolean isCollidable()
+	{
 		return false;
 	}
+	
 
 	@Override
-	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-		boolean b = this.canNeighborCatchFire(worldIn, pos);
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	{
+		//boolean b = this.canNeighborCatchFire(worldIn, pos);
+		boolean b = this.canNeighborCatchFire(worldIn, pos.down());
+		//pos.down()
+		
 		System.out.println("can Place Block at? " + b);
+		
 		return b;
 	}
 
@@ -243,6 +314,7 @@ public class BlockForceFire extends Block {
 
 		if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP)
 				&& !canCatchFire(worldIn, pos.down())) {
+			/*
 			if (canCatchFire(worldIn, pos.west())) {
 				for (int j = 0; j < 2; ++j) {
 					double d3 = (double) pos.getX() + rand.nextDouble() * 0.10000000149011612D;
@@ -278,6 +350,7 @@ public class BlockForceFire extends Block {
 					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d6, d11, d16, 0.0D, 0.0D, 0.0D);
 				}
 			}
+			*/
 
 			if (canCatchFire(worldIn, pos.up())) {
 				for (int j1 = 0; j1 < 2; ++j1) {
@@ -315,30 +388,50 @@ public class BlockForceFire extends Block {
 	 * Convert the BlockState into the correct metadata value
 	 */
 	@Override
-	public int getMetaFromState(IBlockState state) {
+	public int getMetaFromState(IBlockState state)
+	{
 		return ((Integer) state.getValue(AGE)).intValue();
-	}
+	}//ok
 
 	@Override
-	protected BlockStateContainer createBlockState() {
+	protected BlockStateContainer createBlockState()
+	{
 		return new BlockStateContainer(this, new IProperty[] { AGE, NORTH, EAST, SOUTH, WEST, UPPER });
-	}
+	}//ok
 
 	/*
 	 * ================================= Forge Start
 	 * ======================================
 	 */
 
-	public boolean canCatchFire(IBlockAccess world, BlockPos pos) {
+	public boolean canCatchFire(IBlockAccess world, BlockPos pos)
+	{
+		/*
 		System.out.println("Current Block" + world.getBlockState(pos).getBlock().getRegistryName() + "Do we Have it?"
 				+ (this.SMELT_MAP.get(world.getBlockState(pos).getBlock()) != null));
+				*/
+		
+		
 		if (world.getBlockState(pos).getBlock() == Blocks.AIR)
 			return false;
+		
 		return this.SMELT_MAP.get(world.getBlockState(pos).getBlock()) != null;
+		
+		/*
+		System.out.println("Current Block" + world.getBlockState(pos).getBlock().getRegistryName() + "Do we Have it?"
+				+ (this.SMELT_MAP.get(world.getBlockState(pos).getBlock()) != null));
+		
+		
+		if (world.getBlockState(pos).getBlock() == Blocks.AIR)
+			return false;
+		
+		return this.SMELT_MAP.get(world.getBlockState(pos).getBlock()) != null;
+		*/
 	}
 
 	@Override
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+	{
 		return BlockFaceShape.UNDEFINED;
-	}
+	}//ok
 }
