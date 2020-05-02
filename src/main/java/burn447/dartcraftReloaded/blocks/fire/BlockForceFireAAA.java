@@ -108,6 +108,9 @@ public class BlockForceFireAAA extends Block
 			setFireInfo(Blocks.REDSTONE_BLOCK, Blocks.GLOWSTONE);
 			
 			setFireInfo(Blocks.WOOL, Blocks.DIAMOND_BLOCK);
+			
+			
+		//	setFireInfo(Blocks.DIAMOND_BLOCK, Blocks.DIAMOND_BLOCK);
 		}
 
 
@@ -253,25 +256,41 @@ public class BlockForceFireAAA extends Block
 	                    j = -50;
 	                }
 
+	                
+	                
+	                this.tryCatchFireBlock(worldIn, pos.east(), 1 + j, rand, i, EnumFacing.WEST);
+	                this.tryCatchFireBlock(worldIn, pos.west(), 1 + j, rand, i, EnumFacing.EAST);
+	                this.tryCatchFireBlock(worldIn, pos.down(), 1 + j, rand, i, EnumFacing.UP);
+	                this.tryCatchFireBlock(worldIn, pos.up(), 1 + j, rand, i, EnumFacing.DOWN);
+	                this.tryCatchFireBlock(worldIn, pos.north(), 1 + j, rand, i, EnumFacing.SOUTH);
+	                this.tryCatchFireBlock(worldIn, pos.south(), 1 + j, rand, i, EnumFacing.NORTH);
+	                
+	                
+	                
+	                
+	                
+	                
+	                
+	                
+	                
 	                /*
-	                this.tryCatchFire(worldIn, pos.east(), 300 + j, rand, i, EnumFacing.WEST);
-	                this.tryCatchFire(worldIn, pos.west(), 300 + j, rand, i, EnumFacing.EAST);
-	                this.tryCatchFire(worldIn, pos.down(), 250 + j, rand, i, EnumFacing.UP);
-	                this.tryCatchFire(worldIn, pos.up(), 250 + j, rand, i, EnumFacing.DOWN);
-	                this.tryCatchFire(worldIn, pos.north(), 300 + j, rand, i, EnumFacing.SOUTH);
-	                this.tryCatchFire(worldIn, pos.south(), 300 + j, rand, i, EnumFacing.NORTH);
+	                this.tryCatchFireBlock(worldIn, pos.east(), 300 + j, rand, i, EnumFacing.WEST);
+	                this.tryCatchFireBlock(worldIn, pos.west(), 300 + j, rand, i, EnumFacing.EAST);
+	                this.tryCatchFireBlock(worldIn, pos.down(), 300 + j, rand, i, EnumFacing.UP);
+	                this.tryCatchFireBlock(worldIn, pos.up(), 300 + j, rand, i, EnumFacing.DOWN);
+	                this.tryCatchFireBlock(worldIn, pos.north(), 300 + j, rand, i, EnumFacing.SOUTH);
+	                this.tryCatchFireBlock(worldIn, pos.south(), 300 + j, rand, i, EnumFacing.NORTH);
 	                */
 	                
-	                
-	                this.tryCatchFireBlock(worldIn, pos.east());
-	                this.tryCatchFireBlock(worldIn, pos.west());
-	                this.tryCatchFireBlock(worldIn, pos.down());
-	                this.tryCatchFireBlock(worldIn, pos.up());
-	                this.tryCatchFireBlock(worldIn, pos.north());
-	                this.tryCatchFireBlock(worldIn, pos.south());
+	                /*
+	                this.tryCatchFireBlock(worldIn, pos.east(), j, rand, j, null);
+	                this.tryCatchFireBlock(worldIn, pos.west(), j, rand, j, null);
+	                this.tryCatchFireBlock(worldIn, pos.down(), j, rand, j, null);
+	                this.tryCatchFireBlock(worldIn, pos.up(), j, rand, j, null);
+	                this.tryCatchFireBlock(worldIn, pos.north(), j, rand, j, null);
+	                this.tryCatchFireBlock(worldIn, pos.south(), j, rand, j, null);
+	                */
 
-
-	                
 	                for (int k = -1; k <= 1; ++k)
 	                {
 	                    for (int l = -1; l <= 1; ++l)
@@ -288,10 +307,13 @@ public class BlockForceFireAAA extends Block
 	                                }
 
 	                                BlockPos blockpos = pos.add(k, i1, l);
-	                                
-	                                if (checkBlock(worldIn, blockpos))
+	                                int k1 = this.getNeighborEncouragement(worldIn, blockpos);
+
+	                                //System.out.println("INT：：：" + this.getNeighborEncouragement(worldIn, blockpos));
+	                                if (k1 > 0)
+	                                //if (A_checkBlock(worldIn, blockpos, block))
 	                                {
-	                                    int l1 = ( 40 + worldIn.getDifficulty().getId() * 7) / (i + 30);
+	                                    int l1 = (k1 + 40 + worldIn.getDifficulty().getId() * 7) / (i + 30);
 
 	                                    if (flag1)
 	                                    {
@@ -307,21 +329,15 @@ public class BlockForceFireAAA extends Block
 	                                            i2 = 15;
 	                                        }
 	                                        
-	                                        System.out.println("随便生成火999");
-
+	                                        System.out.println("真的？");
 	                                        worldIn.setBlockState(blockpos, state.withProperty(AGE, Integer.valueOf(i2)), 3);
 	                                    }
 	                                }
-	                                
-	                                
-	                                //int k1 = this.getNeighborEncouragement(worldIn, blockpos);
-	                                
-	                                //k1 +
-	                                
 	                            }
 	                        }
 	                    }
 	                }
+	                
 	            }
 	        }
 	    }
@@ -353,9 +369,38 @@ public class BlockForceFireAAA extends Block
 	    
 	    
 	    
-	    private void tryCatchFireBlock(World worldIn, BlockPos pos)
+	    private void tryCatchFireBlock(World worldIn, BlockPos pos, int chance, Random random, int age, EnumFacing face)
 	    {
+	    	//int i = worldIn.getBlockState(pos).getBlock().getFlammability(worldIn, pos, face);
 	    	
+	        if (checkBlock(worldIn, pos))
+	        {
+	            if (random.nextInt(age + 10) < 5 && !worldIn.isRainingAt(pos))
+	            {
+	                int j = age + random.nextInt(5) / 4;
+
+	                if (j > 15)
+	                {
+	                    j = 15;
+	                }
+
+	                //worldIn.setBlockState(pos, this.getDefaultState().withProperty(AGE, Integer.valueOf(j)), 3);
+	            }
+	            else
+	            {
+	                //worldIn.setBlockToAir(pos);
+	                
+	                Block obj = worldIn.getBlockState(pos).getBlock();
+		    		//System.out.println("现在冶炼块我们有没有冶炼" + obj);
+		    		if (this.SMELT_MAP.get(obj) == null)
+		    			return;
+		    		worldIn.setBlockState(pos, this.SMELT_MAP.get(obj).getDefaultState());
+		    		return;
+	            }
+
+	           
+	        }
+	    	/*
 	        if (checkBlock(worldIn, pos))
 	        {
 	        	Block obj = worldIn.getBlockState(pos).getBlock();
@@ -364,7 +409,7 @@ public class BlockForceFireAAA extends Block
 	    			return;
 	    		worldIn.setBlockState(pos, this.SMELT_MAP.get(obj).getDefaultState());
 	    		return;
-	        }
+	        }*/
 	    }
 
 
@@ -381,7 +426,66 @@ public class BlockForceFireAAA extends Block
 	        return false;
 	    }
 
+	    /*=================================================================*/
+	    
+	    
+	    /*
+	    private int getintkaioff(World worldIn, BlockPos pos)
+	    {
+	    	int i = 0;
+	    	
+	    	if(checkBlock(worldIn, pos))
+	    	{
+	    		i =+1;
+	    	}
+	    	return i;
+	    }
+	    */
+
+
+	    public boolean C_getFireSpreadSpeed(IBlockAccess world, BlockPos pos, EnumFacing face)
+	    {
+	        return A_checkBlock(world, pos, this);
+	    }
+	    
+	    
+	    /*=================================================================*/
+	    
+	    
+	    
 	    private int getNeighborEncouragement(World worldIn, BlockPos pos)
+	    {
+	        if (!worldIn.isAirBlock(pos))
+	        {
+	            return 0;
+	        }
+	        else
+	        {
+	            int i = 0;
+
+	            for (EnumFacing enumfacing : EnumFacing.values())
+	            {
+	            	// if(C_getFireSpreadSpeed(worldIn, pos, enumfacing))
+	               if(C_getFireSpreadSpeed(worldIn, pos.offset(enumfacing), enumfacing.getOpposite()))
+	               {
+	            	   i =+ 1;
+	               }
+	            	
+	            	
+	            	//i = Math.max(worldIn.getBlockState(pos.offset(enumfacing)).getBlock().getFireSpreadSpeed(worldIn, pos.offset(enumfacing), enumfacing.getOpposite()), i);
+	 	           
+	            	//i = getintkaioff(worldIn, pos);
+	            	//i = Math.max(worldIn.getBlockState(pos.offset(enumfacing)).getBlock().getFireSpreadSpeed(worldIn, pos.offset(enumfacing), enumfacing.getOpposite()), i);
+	            }
+	            //System.out.println("return：：：" + i);
+	            
+	            return i;
+	        }
+	    }
+
+	    
+	    /*
+		private int getNeighborEncouragement(World worldIn, BlockPos pos)
 	    {
 	        if (!worldIn.isAirBlock(pos))
 	        {
@@ -400,6 +504,13 @@ public class BlockForceFireAAA extends Block
 	        }
 	    }
 
+
+
+
+
+
+
+	    */
 	  
 	    
 	    /**
@@ -435,7 +546,7 @@ public class BlockForceFireAAA extends Block
 	    /**
 	     * Called after the block is set in the Chunk data, but before the Tile Entity is set
 	     */
-	    
+
 	    /*
 	    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	    {
@@ -600,7 +711,8 @@ public class BlockForceFireAAA extends Block
 	    @Deprecated // Use tryCatchFire with face below
 	    private void catchOnFire(World worldIn, BlockPos pos, int chance, Random random, int age)
 	    {
-	        this.tryCatchFireBlock(worldIn, pos);
+	        //this.tryCatchFireBlock(worldIn, pos);
+	        this.tryCatchFireBlock(worldIn, pos, chance, random, age, EnumFacing.UP);
 	    }
 	    
 	    
